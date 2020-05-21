@@ -1,0 +1,15 @@
+*.log
+/.env
+/.php_cs.cache
+/.phpunit.result.cache
+/auth.json
+/node_modules
+/phpunit.xml
+/public/css
+/public/hot
+/public/js
+/public/mix-manifest.json
+/public/storage
+/public/vendor
+/storage/*.key
+/vendor
