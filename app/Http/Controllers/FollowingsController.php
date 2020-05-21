@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\View\View;
+use Illuminate\Http\Request;
+
+class FollowingsController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function __invoke(Request $request) : View
+    {
+        return view('followings')
+            ->withUser($user = $request->user())
+            ->withDiffs(
+                $user
+                    ->diffs()
+                    ->whereFor('friends')
+                    ->latest()
+                    ->simplePaginate(10)
+            );
+    }
+}

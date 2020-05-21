@@ -3,17 +3,14 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
     protected $hidden = [
         'password',
@@ -21,6 +18,15 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'data'      => 'object',
+        'followers' => 'collection',
+        'friends'   => 'collection',
+        'muted'     => 'collection',
+        'blocked'   => 'collection',
     ];
+
+    public function diffs() : HasMany
+    {
+        return $this->hasMany(Diff::class);
+    }
 }

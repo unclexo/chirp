@@ -7,13 +7,10 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    protected $commands = [
-        //
-    ];
-
     protected function schedule(Schedule $schedule) : void
     {
-        // $schedule->command('inspire')->hourly();
+        // SQS doesn't support delayed jobs. We have to use the scheduler.
+        $schedule->command('fetch:all')->everyFiveMinutes();
     }
 
     protected function commands() : void

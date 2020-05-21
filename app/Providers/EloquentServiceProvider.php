@@ -3,17 +3,13 @@
 namespace App\Providers;
 
 use App\User;
+use App\Observers\UserObserver;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Relations\Relation;
 
 class EloquentServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot() : void
     {
-        // Custom polymorphic types, useful if models' namespace changes:
-        // https://laravel.com/docs/eloquent-relationships#polymorphic-relations
-        Relation::morphMap([
-            User::class,
-        ]);
+        User::observe(UserObserver::class);
     }
 }

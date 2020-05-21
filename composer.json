@@ -1,23 +1,16 @@
 {
-    "name": "benjamincrozat/laravel-boilerplate",
-    "description": "Opinionated way to start a new Laravel project.",
-    "keywords": ["boilerplate", "framework", "laravel"],
-    "license": "MIT",
-    "type": "project",
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://nova.laravel.com"
-        }
-    ],
     "require": {
         "php": "^7.2.5",
+        "abraham/twitteroauth": "^1.1",
+        "bref/bref": "^0.5.24",
+        "bref/laravel-bridge": "^0.1.0",
+        "driesvints/blade-icons": "^2.2",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/dusk": "^6.1",
         "laravel/framework": "^7.0",
-        "laravel/nova": "^3.0",
+        "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
         "laravelcafeine/laravel-blade-sharpener": "^1.0"
     },

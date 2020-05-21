@@ -1,4 +1,16 @@
 module.exports = {
+    purge: {
+        content: [
+            '**/*.blade.php',
+            '**/*.vue',
+        ],
+        options: {
+            whitelist: [
+                //
+            ],
+        },
+    },
+
     theme: {
         container: {
             center: true,
@@ -6,13 +18,29 @@ module.exports = {
         },
 
         extend: {
-            screens: {
-                dark: { raw: '(prefers-color-scheme: dark)' },
+            fontFamily: {
+                sans: ['Montserrat', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
             },
+
+            opacity: {
+                5: '0.05',
+                10: '0.1',
+                15: '0.15',
+                20: '0.2',
+                30: '0.3',
+                35: '0.35',
+                40: '0.4',
+            },
+        },
+
+        screens: {
+            sm: '568px',
+            md: '768px',
+            lg: '1024px',
         },
     },
 
-    variants: {},
-
-    plugins: [],
+    variants: {
+        backgroundOpacity: ['responsive', 'hover', 'group-hover', 'focus'],
+    },
 }
