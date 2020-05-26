@@ -6,8 +6,8 @@ use App\Diff;
 use App\User;
 use Exception;
 use App\Facades\Twitter;
+use Illuminate\Support\Arr;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Collection;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -51,12 +51,12 @@ abstract class BaseJob implements ShouldQueue
         // If `$this->user->{$for}` is empty, it means it's a
         // 1st time user. There can't be any addition yet.
         $additions = $this->user->{$for}->isEmpty()
-            ? new Collection
-            : new Collection(array_diff($ids, $this->user->{$for}->toArray()));
+            ? []
+            : array_diff($ids, $this->user->{$for}->toArray());
 
-        $deletions = new Collection(array_diff($this->user->{$for}->toArray(), $ids));
+        $deletions = array_diff($this->user->{$for}->toArray(), $ids);
 
-        if (! $additions->count() && ! $deletions->count()) {
+        if (! count($additions) && ! count($deletions)) {
             return;
         }
 
@@ -71,38 +71,38 @@ abstract class BaseJob implements ShouldQueue
         $this->user->update([$for => $ids]);
     }
 
-    protected function getUsersForIds($ids) : Collection
+    protected function getUsersForIds(array $ids) : array
     {
-        $chunks = (new Collection($ids))->chunk(100);
+        $chunks = array_chunk($ids, 100);
 
-        if ($chunks->isEmpty()) {
+        if (! count($chunks)) {
             return $chunks;
         }
 
-        $users = $chunks->map(function (Collection $ids) {
+        $users = Arr::collapse(array_map(function (array $ids) {
             $this->checkForTwitterError(
                 $users = Twitter::get('users/lookup', [
-                    'user_id' => $ids->join(','),
+                    'user_id' => implode(',', $ids),
                 ])
             );
 
             return $users;
-        })->collapse();
+        }, $chunks));
 
-        $friendships = $chunks->map(function (Collection $ids) {
+        $friendships = Arr::collapse(array_map(function (array $ids) {
             $this->checkForTwitterError(
                 $friendships = Twitter::get('friendships/lookup', [
-                    'user_id' => $ids->join(','),
+                    'user_id' => implode(',', $ids),
                 ])
             );
 
             return $friendships;
-        })->collapse();
+        }, $chunks));
 
-        return collect($users)->map(function ($user) use ($friendships) {
-            $friendship = collect($friendships)->where('id', $this->user->id)->first();
+        return array_map(function (object $user) use ($friendships) {
+            $key = array_search($user->id, array_column((array) $friendships, 'id'));
 
-            return array_merge((array) $user, (array) $friendship);
-        });
+            return array_merge((array) $user, (array) $friendships[$key]);
+        }, $users);
     }
 }
