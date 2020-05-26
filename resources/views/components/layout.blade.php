@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="@mix('/css/app.css')">
     </head>
     <body class="bg-gray-900 text-gray-400">
-        <a href="https://github.com/sponsors/benjamincrozat" target="_blank" class="bg-green-600 hover:bg-green-500 block p-4 text-center">
+        <a href="https://github.com/sponsors/benjamincrozat" target="_blank" class="bg-green-600 hover:bg-opacity-75 block p-4 text-center">
             <span class="block container">Sponsor @config('app.name')'s developer on GitHub and <strong>get access to the source code</strong> to see how this serverless app works! →</span>
         </a>
 
