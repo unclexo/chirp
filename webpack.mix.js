@@ -6,4 +6,5 @@ mix.options({
         processCssUrls: false,
     })
     .sass('resources/sass/app.sass', 'public/css')
+    .js('resources/js/app.js', 'public/js')
     .version()

@@ -47,6 +47,8 @@
             </p>
         </footer>
 
+        <script src="@mix('/js/app.js')"></script>
+
         @stack('body_code')
 
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-35731537-17"></script>

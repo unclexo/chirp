@@ -57,6 +57,7 @@ package:
         - node_modules/**
         - public/css/**
         - public/img/**
+        - public/js/**
         - resources/sass/**
         - storage/**
         - stubs/**
