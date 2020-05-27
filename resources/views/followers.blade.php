@@ -15,7 +15,7 @@
             <div class="mt-8">
                 <h4 class="font-semibold px-4">New followers</h4>
 
-                @if ($additionsForDay)
+                @if (count($additionsForDay))
                     <ul class="mt-4">
                         @foreach ($additionsForDay as $additions)
                             @foreach ($additions as $addition)
@@ -37,7 +37,7 @@
             <div class="mt-8">
                 <h4 class="font-semibold px-4">Unfollowers</h4>
 
-                @if ($deletionsForDay)
+                @if (count($deletionsForDay))
                     <ul class="mt-4">
                         @foreach ($deletionsForDay as $deletions)
                             @foreach ($deletions as $deletion)
