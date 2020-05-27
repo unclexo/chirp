@@ -22,6 +22,13 @@ class FetchUsersTest extends TestCase
                 json_decode(file_get_contents(__DIR__ . '/json/account-verify_credentials.json'))
             )
             ->shouldReceive('getLastHttpCode')
+            ->andReturn(200)
+            ->shouldReceive('get')
+            ->with('account/settings')
+            ->andReturn(
+                json_decode(file_get_contents(__DIR__ . '/json/account-settings.json'))
+            )
+            ->shouldReceive('getLastHttpCode')
             ->andReturn(200);
 
         $user = factory(User::class)->create();
