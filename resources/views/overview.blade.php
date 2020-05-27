@@ -1,10 +1,12 @@
 <x-layout :hide-sidebar="Auth::guest()">
     @auth
-        <div class="sm:flex sm:items-center">
-            <img src="{{ $avatar }}" width="128" height="128" class="flex-none rounded-full">
+        <div class="mt-16 md:mt-0 sm:flex sm:items-center">
+            <div class="flex-none text-center md:text-left">
+                <img src="{{ $avatar }}" class="h-24 md:h-32 inline rounded-full">
+            </div>
 
             <div class="sm:ml-6 mt-6 sm:mt-0">
-                <h1 class="font-semibold leading-none text-3xl">{{ $user->name }}</h1>
+                <h1 class="font-semibold leading-none text-3xl text-center md:text-left">{{ $user->name }}</h1>
 
                 <p class="italic mt-4">{!! $description !!}</p>
 
