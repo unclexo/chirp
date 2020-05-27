@@ -121,8 +121,10 @@ abstract class BaseJob implements ShouldQueue
      */
     protected function checkForTwitterError($response) : void
     {
-        if (200 !== Twitter::getLastHttpCode()) {
-            throw new Exception("User #{$this->user->id}: " . json_encode($response));
+        if (200 === Twitter::getLastHttpCode()) {
+            return;
         }
+
+        throw new Exception("Error code: {$response->errors[0]->code} for user #{$this->user->id}. Message: {$response->errors[0]->message}.");
     }
 }
