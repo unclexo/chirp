@@ -6,7 +6,7 @@ use App\User;
 use App\Jobs\FetchUser;
 use Illuminate\Console\Command;
 
-class FetchUserCommand extends Command
+class FetchUsersCommand extends Command
 {
     protected $signature = 'fetch:users';
 
