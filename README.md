@@ -7,7 +7,7 @@
 
 ## Welcome
 
-Hello! Welcome to Chrip's repository! You're there because you sponsor me on GitHub. Thank you!
+Hello! Welcome to Chirp's repository! You're there because you sponsor me on GitHub. Thank you!
 
 ## Development
 
