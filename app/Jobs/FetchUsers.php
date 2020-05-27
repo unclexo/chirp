@@ -13,8 +13,13 @@ class FetchUsers extends BaseJob
             $this->user->token_secret
         );
 
-        $data           = Twitter::get('account/verify_credentials');
-        $data->settings = Twitter::get('account/settings');
+        $this->checkForTwitterError(
+            $data = Twitter::get('account/verify_credentials')
+        );
+
+        $this->checkForTwitterError(
+            $data->settings = Twitter::get('account/settings')
+        );
 
         $this->user->update([
             'id'       => $data->id,
