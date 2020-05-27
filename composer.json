@@ -12,7 +12,8 @@
         "laravel/framework": "^7.0",
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
-        "laravelcafeine/laravel-blade-sharpener": "^1.0"
+        "laravelcafeine/laravel-blade-sharpener": "^1.0",
+        "sentry/sentry-laravel": "^1.7"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
