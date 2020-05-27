@@ -21,12 +21,14 @@ class FollowersController extends Controller
                 DB::table('diffs')
                     ->selectRaw('
                         DATE(created_at) AS date,
+                        user_id,
                         JSON_ARRAYAGG(additions) AS additions,
                         JSON_ARRAYAGG(deletions) AS deletions
                     ')
                     ->where('user_id', $user->id)
                     ->where('for', 'followers')
                     ->groupBy('date')
+                    ->groupBy('user_id')
                     ->orderBy('date', 'DESC')
                     ->get()
             );
