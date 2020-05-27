@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FollowersController extends Controller
 {
@@ -17,16 +18,17 @@ class FollowersController extends Controller
         return view('followers')
             ->withUser($user = $request->user())
             ->withDiffs(
-                $user
-                    ->diffs()
-                    ->whereFor('followers')
-                    ->where(function ($query) {
-                        return $query
-                            ->where('additions', '!=', '[]')
-                            ->orWhere('deletions', '!=', '[]');
-                    })
-                    ->latest()
-                    ->simplePaginate(10)
+                DB::table('diffs')
+                    ->selectRaw('
+                        DATE(created_at) AS date,
+                        JSON_ARRAYAGG(additions) AS additions,
+                        JSON_ARRAYAGG(deletions) AS deletions
+                    ')
+                    ->where('user_id', $user->id)
+                    ->where('for', 'followers')
+                    ->groupBy('date')
+                    ->orderBy('date', 'DESC')
+                    ->get()
             );
     }
 }

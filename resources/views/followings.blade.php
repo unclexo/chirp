@@ -4,17 +4,22 @@
     @forelse ($diffs as $diff)
         <div class="bg-gray-700 mt-8 py-4 rounded">
             <h3 class="-mx-2 bg-blue-700 font-semibold px-6 py-4 rounded-sm shadow">
-                {{ $diff->created_at->isoFormat('LL') }}
+                {{ Illuminate\Support\Carbon::parse($diff->date)->isoFormat('LL') }}
             </h3>
+
+            @php
+                $additions = json_decode($diff->additions, true)[0];
+                $deletions = json_decode($diff->deletions, true)[0];
+            @endphp
 
             <div class="mt-8">
                 <h4 class="font-semibold px-4">New people you subscribed to</h4>
 
-                @if ($diff->additions->isNotEmpty())
+                @if ($additions && is_array($additions))
                     <ul class="mt-4">
-                        @foreach ($diff->additions as $follow)
+                        @foreach ($additions as $addition)
                             <li>
-                                <x-user-list-item :user="$follow">
+                                <x-user-list-item :user="$addition">
                                     <x-slot name="icon">
                                         <x:zondicon-add-solid class="fill-current h-4 mr-4 text-green-500 w-4" />
                                     </x-slot>
@@ -30,11 +35,11 @@
             <div class="mt-8">
                 <h4 class="font-semibold px-4">People you unsubscribed from</h4>
 
-                @if ($diff->deletions->isNotEmpty())
+                 @if ($deletions && is_array($deletions))
                     <ul class="mt-4">
-                        @foreach ($diff->deletions as $unfollow)
+                        @foreach ($deletions as $deletion)
                             <li>
-                                <x-user-list-item :user="$unfollow">
+                                <x-user-list-item :user="$deletion">
                                     <x-slot name="icon">
                                         <x:zondicon-minus-solid class="fill-current h-4 mr-4 text-red-500 w-4" />
                                     </x-slot>
