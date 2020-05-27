@@ -38,5 +38,6 @@ class FetchUsersTest extends TestCase
         $this->assertEquals(1, $user->id);
         $this->assertEquals('Homer Simpson', $user->name);
         $this->assertEquals('homersimpson', $user->nickname);
+        $this->assertNotNull($user->data->settings);
     }
 }
