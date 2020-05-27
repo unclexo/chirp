@@ -20,7 +20,7 @@
             </li>
         </ul>
 
-        @if ($user['verified'] || in_array('followed_by', $user['connections']) || $user['following'] || $user['protected'])
+        @if ($user['verified'] || in_array('followed_by', $user['connections']) || $user['following'] || $user['protected'] || in_array('muting', $user['connections']))
             <ul class="flex mt-3 pb-1">
                 @if ($user['verified'])
                     <li class="bg-blue-500 font-bold mr-1 px-2 sm:px-3 rounded-sm text-white text-xs uppercase">
@@ -43,6 +43,12 @@
                 @if ($user['protected'])
                     <li class="bg-gray-900 font-bold mr-1 px-2 sm:px-3 rounded-sm text-white text-xs uppercase">
                         Protected
+                    </li>
+                @endif
+
+                @if (in_array('muting', $user['connections']))
+                    <li class="bg-blue-900 font-bold mr-1 px-2 sm:px-3 rounded-sm text-gray-900 text-blue-100 text-xs uppercase">
+                        Muting
                     </li>
                 @endif
             </ul>

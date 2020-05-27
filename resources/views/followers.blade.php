@@ -3,8 +3,8 @@
 
     @forelse ($diffs as $diffsForDay)
         <div class="bg-gray-700 mt-8 py-4 rounded">
-            <h3 class="-mx-2 bg-blue-700 font-semibold px-6 py-4 rounded-sm shadow">
-                {{ Illuminate\Support\Carbon::parse($diffsForDay->date)->isoFormat('LL') }}
+            <h3 class="-mx-2 bg-blue-700 flex items-center font-semibold px-6 py-4 rounded-sm shadow">
+                <x:zondicon-calendar class="fill-current h-4 inline mr-3 relative" style="top: -2px" /> {{ Illuminate\Support\Carbon::parse($diffsForDay->date)->isoFormat('LL') }}
             </h3>
 
             @php
@@ -12,7 +12,7 @@
                 $deletionsForDay = json_decode($diffsForDay->deletions, true);
             @endphp
 
-            <div class="mt-8">
+            <div class="mt-4">
                 <h4 class="font-semibold px-4">New followers</h4>
 
                 @if ($additionsForDay)
@@ -34,7 +34,7 @@
                 @endif
             </div>
 
-            <div class="mt-8">
+            <div class="mt-4">
                 <h4 class="font-semibold px-4">Unfollowers</h4>
 
                 @if ($deletionsForDay)
