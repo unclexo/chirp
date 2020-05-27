@@ -1,7 +1,7 @@
 <x-layout>
     <h2 class="font-semibold leading-none text-xl">Followers history</h2>
 
-    @forelse($diffs as $diffsForDay)
+    @forelse ($diffs as $diffsForDay)
         <div class="bg-gray-700 mt-8 py-4 rounded">
             <h3 class="-mx-2 bg-blue-700 font-semibold px-6 py-4 rounded-sm shadow">
                 {{ Illuminate\Support\Carbon::parse($diffsForDay->date)->isoFormat('LL') }}
@@ -15,7 +15,7 @@
             <div class="mt-8">
                 <h4 class="font-semibold px-4">New followers</h4>
 
-                @if (count($additionsForDay))
+                @if (! empty($additionsForDay[0]))
                     <ul class="mt-4">
                         @foreach ($additionsForDay as $additions)
                             @foreach ($additions as $addition)
@@ -37,7 +37,7 @@
             <div class="mt-8">
                 <h4 class="font-semibold px-4">Unfollowers</h4>
 
-                @if (count($deletionsForDay))
+                @if (! empty($deletionsForDay[0]))
                     <ul class="mt-4">
                         @foreach ($deletionsForDay as $deletions)
                             @foreach ($deletions as $deletion)

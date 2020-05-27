@@ -15,7 +15,7 @@
             <div class="mt-8">
                 <h4 class="font-semibold px-4">New people you subscribed to</h4>
 
-                @if (count($additionsForDay))
+                @if (! empty($additionsForDay[0]))
                     <ul class="mt-4">
                         @foreach ($additionsForDay as $additions)
                             @foreach ($additions as $addition)
@@ -37,7 +37,7 @@
             <div class="mt-8">
                 <h4 class="font-semibold px-4">People you unsubscribed from</h4>
 
-                 @if (count($deletionsForDay))
+                 @if (! empty($deletionsForDay[0]))
                     <ul class="mt-4">
                         @foreach ($deletionsForDay as $deletions)
                             @foreach ($deletions as $deletion)
