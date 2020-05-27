@@ -6,19 +6,25 @@
             </div>
 
             <div class="sm:ml-6 mt-6 sm:mt-0">
-                <h1 class="font-semibold leading-none text-3xl text-center md:text-left">{{ $user->name }}</h1>
+                <h1 class="font-semibold leading-none mb-4 text-3xl text-center md:text-left">{{ $user->name }}</h1>
 
-                <p class="italic mt-4">{!! $description !!}</p>
+                @if ($description)
+                    <p class="italic my-4">{!! $description !!}</p>
+                @endif
 
-                <p class="flex items-center mt-4">
-                    <x:zondicon-globe class="fill-current h-5 mr-3 relative" style="top: -1px" />
-                    <a href="{{ $website['expanded_url'] }}" target="_blank" class="font-semibold hover:text-white">{{ $website['display_url'] }}</a>
-                </p>
+                @if ($website['expanded_url'] && $website['display_url'])
+                    <p class="flex items-center mt-4">
+                        <x:zondicon-globe class="fill-current h-5 mr-3 relative" style="top: -1px" />
+                        <a href="{{ $website['expanded_url'] }}" target="_blank" class="font-semibold hover:text-white">{{ $website['display_url'] }}</a>
+                    </p>
+                @endif
 
-                <p class="flex items-center mt-2">
-                    <x:zondicon-location class="fill-current h-5 mr-3 relative" style="top: -1px" />
-                    {{ $user->data->location }}
-                </p>
+                @if ($user->data->location)
+                    <p class="flex items-center mt-2">
+                        <x:zondicon-location class="fill-current h-5 mr-3 relative" style="top: -1px" />
+                        {{ $user->data->location }}
+                    </p>
+                @endif
 
                 <p class="flex items-center mt-2">
                     <x:zondicon-calendar class="fill-current h-5 mr-3 relative" style="top: -1px" />                    Created on {{ $createdAt->isoFormat('LL') }}
