@@ -10,7 +10,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule) : void
     {
         // SQS doesn't support delayed jobs. We have to use the scheduler.
-        $schedule->command('fetch:all')->everyFiveMinutes();
+        $schedule->command('fetch:all')->spliceIntoPosition(1, '*/2');
     }
 
     protected function commands() : void
