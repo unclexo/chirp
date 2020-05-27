@@ -3,9 +3,12 @@
 namespace App\Jobs;
 
 use App\Facades\Twitter;
+use App\Jobs\Traits\CallsTwitter;
 
 class FetchBlockedUsers extends BaseJob
 {
+    use CallsTwitter;
+
     public function handle() : void
     {
         Twitter::setOauthToken(
@@ -14,7 +17,7 @@ class FetchBlockedUsers extends BaseJob
         );
 
         do {
-            $this->checkForTwitterError(
+            $this->checkForTwitterErrors(
                 $response = Twitter::get('blocks/ids', [
                     'cursor' => $response->next_cursor ?? -1,
                 ])

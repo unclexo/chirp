@@ -15,17 +15,17 @@ class FetchFriendsTest extends TestCase
     /** @test */
     public function it_tracks_new_followings() : void
     {
-        $usersLookup = json_decode(file_get_contents(__DIR__ . '/json/users-lookup.json'));
+        $usersLookup = json_decode(file_get_contents(__DIR__ . '/../../json/users-lookup.json'));
         unset($usersLookup[3], $usersLookup[4]);
 
-        $friendshipsLookup = json_decode(file_get_contents(__DIR__ . '/json/friendships-lookup.json'));
+        $friendshipsLookup = json_decode(file_get_contents(__DIR__ . '/../../json/friendships-lookup.json'));
         unset($friendshipsLookup[3], $friendshipsLookup[4]);
 
         Twitter::shouldReceive('setOauthToken')
             ->shouldReceive('get')
             ->with('friends/ids', ['cursor' => -1])
             ->andReturn(
-                $data = json_decode(file_get_contents(__DIR__ . '/json/friends-ids.json'))
+                $data = json_decode(file_get_contents(__DIR__ . '/../../json/friends-ids.json'))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(200)
@@ -61,17 +61,17 @@ class FetchFriendsTest extends TestCase
     /** @test */
     public function it_tracks_unfollowings() : void
     {
-        $usersLookup = json_decode(file_get_contents(__DIR__ . '/json/users-lookup.json'));
+        $usersLookup = json_decode(file_get_contents(__DIR__ . '/../../json/users-lookup.json'));
         unset($usersLookup[0], $usersLookup[1], $usersLookup[2]);
 
-        $friendshipsLookup = json_decode(file_get_contents(__DIR__ . '/json/friendships-lookup.json'));
+        $friendshipsLookup = json_decode(file_get_contents(__DIR__ . '/../../json/friendships-lookup.json'));
         unset($friendshipsLookup[0], $friendshipsLookup[1], $friendshipsLookup[2]);
 
         Twitter::shouldReceive('setOauthToken')
             ->shouldReceive('get')
             ->with('friends/ids', ['cursor' => -1])
             ->andReturn(
-                $data = json_decode(file_get_contents(__DIR__ . '/json/friends-ids.json'))
+                $data = json_decode(file_get_contents(__DIR__ . '/../../json/friends-ids.json'))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(200)

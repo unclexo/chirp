@@ -3,9 +3,12 @@
 namespace App\Jobs;
 
 use App\Facades\Twitter;
+use App\Jobs\Traits\CallsTwitter;
 
 class FetchMutedUsers extends BaseJob
 {
+    use CallsTwitter;
+
     public function handle() : void
     {
         Twitter::setOauthToken(
@@ -14,7 +17,7 @@ class FetchMutedUsers extends BaseJob
         );
 
         do {
-            $this->checkForTwitterError(
+            $this->checkForTwitterErrors(
                 $response = Twitter::get('mutes/users/ids', [
                     'cursor' => $response->next_cursor ?? -1,
                 ])

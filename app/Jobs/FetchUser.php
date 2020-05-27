@@ -3,9 +3,12 @@
 namespace App\Jobs;
 
 use App\Facades\Twitter;
+use App\Jobs\Traits\CallsTwitter;
 
 class FetchUser extends BaseJob
 {
+    use CallsTwitter;
+
     public function handle() : void
     {
         Twitter::setOauthToken(
@@ -13,11 +16,11 @@ class FetchUser extends BaseJob
             $this->user->token_secret
         );
 
-        $this->checkForTwitterError(
+        $this->checkForTwitterErrors(
             $data = Twitter::get('account/verify_credentials')
         );
 
-        $this->checkForTwitterError(
+        $this->checkForTwitterErrors(
             $data->settings = Twitter::get('account/settings')
         );
 

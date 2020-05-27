@@ -19,14 +19,14 @@ class FetchUserTest extends TestCase
             ->shouldReceive('get')
             ->with('account/verify_credentials')
             ->andReturn(
-                json_decode(file_get_contents(__DIR__ . '/json/account-verify_credentials.json'))
+                json_decode(file_get_contents(__DIR__ . '/../../json/account-verify_credentials.json'))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(200)
             ->shouldReceive('get')
             ->with('account/settings')
             ->andReturn(
-                json_decode(file_get_contents(__DIR__ . '/json/account-settings.json'))
+                json_decode(file_get_contents(__DIR__ . '/../../json/account-settings.json'))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(200);
