@@ -23,6 +23,6 @@ class FetchBlockedUsers extends BaseJob
             $ids = array_merge($ids ?? [], $response->ids);
         } while ($response->next_cursor);
 
-        $this->user->update(['blocked' => $this->getUsersForIds($ids)]);
+        $this->user->update(['blocked' => $this->getUsersDetailsForIds($ids)]);
     }
 }

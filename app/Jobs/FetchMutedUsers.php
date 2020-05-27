@@ -23,6 +23,6 @@ class FetchMutedUsers extends BaseJob
             $ids = array_merge($ids ?? [], $response->ids);
         } while ($response->next_cursor);
 
-        $this->user->update(['muted' => $this->getUsersForIds($ids)]);
+        $this->user->update(['muted' => $this->getUsersDetailsForIds($ids)]);
     }
 }

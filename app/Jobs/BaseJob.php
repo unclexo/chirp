@@ -26,21 +26,38 @@ abstract class BaseJob implements ShouldQueue
         $this->user = $user;
     }
 
-    /**
-     * @throws Exception
-     */
-    protected function checkForTwitterError($response) : void
+    protected function makeDiffFor(string $for) : void
     {
-        if (200 !== Twitter::getLastHttpCode()) {
-            throw new Exception(json_encode($response));
+        $ids = $this->getIdsFor($for);
+
+        if ($this->user->{$for}->isNotEmpty()) {
+            $additions = array_diff($ids, $this->user->{$for}->toArray());
+            $deletions = array_diff($this->user->{$for}->toArray(), $ids);
+
+            if (! count($additions) && ! count($deletions)) {
+                return;
+            }
+
+            $this->user->diffs()->save(
+                new Diff($attributes = [
+                    'for'       => $for,
+                    'additions' => $additions = $this->getUsersDetailsForIds($additions),
+                    'deletions' => $deletions = $this->getUsersDetailsForIds($deletions),
+                ])
+            );
         }
+
+        // We save the IDs when we are sure all the code above ran successfully.
+        // That way, the next job will still be able to detected IDs that
+        // changed at the time the failed job ran.
+        $this->user->update([$for => $ids]);
     }
 
-    protected function makeDiffFor(string $for) : void
+    public function getIdsFor(string $endpoint) : array
     {
         do {
             $this->checkForTwitterError(
-                $response = Twitter::get("$for/ids", [
+                $response = Twitter::get("$endpoint/ids", [
                     'cursor' => $response->next_cursor ?? -1,
                 ])
             );
@@ -48,38 +65,34 @@ abstract class BaseJob implements ShouldQueue
             $ids = array_merge($ids ?? [], $response->ids);
         } while ($response->next_cursor);
 
-        // If `$this->user->{$for}` is empty, it means it's a
-        // 1st time user. There can't be any addition yet.
-        $additions = $this->user->{$for}->isEmpty()
-            ? []
-            : array_diff($ids, $this->user->{$for}->toArray());
-
-        $deletions = array_diff($this->user->{$for}->toArray(), $ids);
-
-        if (! count($additions) && ! count($deletions)) {
-            return;
-        }
-
-        $this->user->diffs()->save(
-            new Diff($attributes = [
-                'for'       => $for,
-                'additions' => $additions = $this->getUsersForIds($additions),
-                'deletions' => $deletions = $this->getUsersForIds($deletions),
-            ])
-        );
-
-        $this->user->update([$for => $ids]);
+        return $ids;
     }
 
-    protected function getUsersForIds(array $ids) : array
+    protected function getUsersDetailsForIds(array $ids) : array
     {
+        // The code below uses vanilla PHP to work through arrays instead of Collections. More details:
+        // https://github.com/benjamincrozat/chirp/commit/6e54b53ef8cd5085756ed226f1448e9fed092df4
+
         $chunks = array_chunk($ids, 100);
 
         if (! count($chunks)) {
             return $chunks;
         }
 
-        $users = Arr::collapse(array_map(function (array $ids) {
+        $users = $this->getUsersFromIds($chunks);
+
+        $friendships = $this->getConnectionsToUserFromIds($chunks);
+
+        return array_map(function (object $user) use ($friendships) {
+            $key = array_search($user->id, array_column((array) $friendships, 'id'));
+
+            return array_merge((array) $user, (array) $friendships[$key]);
+        }, $users);
+    }
+
+    public function getUsersFromIds(array $chunks) : array
+    {
+        return Arr::collapse(array_map(function (array $ids) {
             $this->checkForTwitterError(
                 $users = Twitter::get('users/lookup', [
                     'user_id' => implode(',', $ids),
@@ -88,8 +101,11 @@ abstract class BaseJob implements ShouldQueue
 
             return $users;
         }, $chunks));
+    }
 
-        $friendships = Arr::collapse(array_map(function (array $ids) {
+    public function getConnectionsToUserFromIds(array $chunks) : array
+    {
+        return Arr::collapse(array_map(function (array $ids) {
             $this->checkForTwitterError(
                 $friendships = Twitter::get('friendships/lookup', [
                     'user_id' => implode(',', $ids),
@@ -98,11 +114,15 @@ abstract class BaseJob implements ShouldQueue
 
             return $friendships;
         }, $chunks));
+    }
 
-        return array_map(function (object $user) use ($friendships) {
-            $key = array_search($user->id, array_column((array) $friendships, 'id'));
-
-            return array_merge((array) $user, (array) $friendships[$key]);
-        }, $users);
+    /**
+     * @throws Exception
+     */
+    protected function checkForTwitterError($response) : void
+    {
+        if (200 !== Twitter::getLastHttpCode()) {
+            throw new Exception(json_encode($response));
+        }
     }
 }
