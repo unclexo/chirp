@@ -3,10 +3,10 @@
 namespace App\Console\Commands;
 
 use App\User;
-use App\Jobs\FetchUsers;
+use App\Jobs\FetchUser;
 use Illuminate\Console\Command;
 
-class FetchUsersCommand extends Command
+class FetchUserCommand extends Command
 {
     protected $signature = 'fetch:users';
 
@@ -17,7 +17,7 @@ class FetchUsersCommand extends Command
         // Let's use a Lazy Collection to stay memory efficient.
         // https://laravel.com/docs/collections#lazy-collections
         User::cursor()->each(function (User $user) {
-            FetchUsers::dispatch($user);
+            FetchUser::dispatch($user);
         });
     }
 }

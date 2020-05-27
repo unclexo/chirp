@@ -4,11 +4,11 @@ namespace Tests\Feature\Jobs;
 
 use App\User;
 use Tests\TestCase;
+use App\Jobs\FetchUser;
 use App\Facades\Twitter;
-use App\Jobs\FetchUsers;
 use Illuminate\Foundation\Testing\WithFaker;
 
-class FetchUsersTest extends TestCase
+class FetchUserTest extends TestCase
 {
     use WithFaker;
 
@@ -33,7 +33,7 @@ class FetchUsersTest extends TestCase
 
         $user = factory(User::class)->create();
 
-        FetchUsers::dispatchNow($user);
+        FetchUser::dispatchNow($user);
 
         $this->assertEquals(1, $user->id);
         $this->assertEquals('Homer Simpson', $user->name);

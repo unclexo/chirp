@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\User;
-use App\Jobs\FetchUsers;
+use App\Jobs\FetchUser;
 use App\Jobs\FetchFriends;
 use App\Jobs\FetchFollowers;
 use App\Jobs\FetchMutedUsers;
@@ -19,6 +19,6 @@ class UserObserver
         FetchFollowers::dispatch($user);
         FetchFriends::dispatch($user);
         FetchMutedUsers::dispatch($user);
-        FetchUsers::dispatch($user);
+        FetchUser::dispatch($user);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Jobs;
 
 use App\Facades\Twitter;
 
-class FetchUsers extends BaseJob
+class FetchUser extends BaseJob
 {
     public function handle() : void
     {
