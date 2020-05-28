@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
             User::cursor()->each(function (User $user) {
                 FetchFavoritedTweets::dispatch($user);
             });
-        })->everyFifteenMinutes();
+        })->everyTenMinutes();
     }
 
     protected function commands() : void
