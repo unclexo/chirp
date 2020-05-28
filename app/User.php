@@ -10,6 +10,8 @@ class User extends Authenticatable
 {
     use Unguarded;
 
+    public $incrementing = false;
+
     protected $casts = [
         'data'      => 'object',
         'followers' => 'collection',
