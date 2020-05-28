@@ -37,7 +37,7 @@
                             <div class="flex mt-4">
                                 @foreach ($like->presenter->media() as $media)
                                     <a href="{{ $media->url }}" class="@if (! $loop->first) ml-2 @endif flex-grow hover:opacity-75">
-                                        <img loading="lazy" src="{{ $media->media_url_https }}" width="{{ $media->sizes->large->w }}" height="{{ $media->sizes->large->h }}" class="h-full object-center object-cover">
+                                        <img loading="lazy" src="{{ $media->media_url_https }}?name=medium" width="{{ $media->sizes->medium->w }}" height="{{ $media->sizes->medium->h }}" class="h-full object-center object-cover">
                                     </a>
                                 @endforeach
                             </div>
