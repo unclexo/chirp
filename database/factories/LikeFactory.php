@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Like::class, function (Faker $faker) {
     return [
-        'id'      => $faker->randomDigitNotNull,
+        'id'      => $faker->randomNumber(),
         'user_id' => $faker->randomDigitNotNull,
         'data'    => [],
     ];
