@@ -3,6 +3,7 @@
 namespace App\Presenters;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 class TweetPresenter
 {
@@ -23,12 +24,24 @@ class TweetPresenter
         return Carbon::parse($this->created_at)->isoFormat('LL');
     }
 
+    public function media() : Collection
+    {
+        return ! empty($this->tweet->extended_entities)
+            ? collect($this->tweet->extended_entities->media)
+            : collect();
+    }
+
     public function text() : string
     {
-        $text = $this->renderHashtagsAndMentions($this->tweet->full_text);
-        $text = $this->renderLinks($text);
-
-        return nl2br($text);
+        return nl2br(
+            $this->removeGalleryUrl(
+                $this->renderLinks(
+                    $this->renderHashtagsAndMentions(
+                        $this->tweet->full_text
+                    )
+                )
+            )
+        );
     }
 
     public function url() : string
@@ -71,7 +84,20 @@ class TweetPresenter
     protected function renderLinks(string $text) : string
     {
         foreach ($this->tweet->entities->urls as $url) {
-            $text = str_replace($url->url, '<a href="' . $url->url . '" target="_blank" rel="noopener" class="font-semibold hover:text-white">' . $url->display_url . '</a>', $text);
+            $text = mb_ereg_replace($url->url, '<a href="' . $url->url . '" target="_blank" rel="noopener" class="font-semibold hover:text-white">' . $url->display_url . '</a>', $text);
+        }
+
+        return $text;
+    }
+
+    protected function removeGalleryUrl(string $text) : string
+    {
+        if (empty($this->tweet->extended_entities->media)) {
+            return $text;
+        }
+
+        foreach ($this->tweet->extended_entities->media as $media) {
+            $text = mb_ereg_replace($media->url, '', $text);
         }
 
         return $text;
