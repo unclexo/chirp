@@ -40,7 +40,11 @@ class FetchLikedTweets extends BaseJob
         } while (true);
 
         Like::whereUserId($this->user->id)->delete();
-        Like::insert($likes->map(function (object $like) {
+
+        // It seems like I'm doing something wrong and that I get duplicates from the
+        // API. For now, I just ignore duplicate entries errors (they're not inserted
+        // so my index is clean) and I'll see later if I can figure this out.
+        Like::insertOrIgnore($likes->map(function (object $like) {
             return [
                 'id'         => $like->id,
                 'user_id'    => $this->user->id,
