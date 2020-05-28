@@ -3,7 +3,7 @@
 
     <div class="mt-8">
         <form method="GET" action="@route('favorites')" class="bg-gray-900 flex items-center justify-center rounded-full">
-            <input type="search" id="q" name="q" value="{{ old('q') ?? $q }}" placeholder="Brexit, Game of Thrones, etc." class="bg-transparent flex-grow pl-6 py-3 placeholder-gray-600 w-full">
+            <input type="search" id="q" name="q" value="{{ old('q') ?? $q }}" placeholder="Search" class="bg-transparent flex-grow pl-6 py-3 placeholder-gray-600 w-full">
 
             <button type="submit" class="bg-blue-500 hover:bg-blue-400 font-bold px-8 py-3 rounded-full text-white">
                 Search

@@ -45,9 +45,9 @@
                 <a href="@route('followings')" class="bg-gray-600 bg-opacity-30 hover:bg-opacity-50 block p-4 rounded truncate">@choice('<span class="block font-semibold text-2xl sm:text-3xl">:total</span> <span>following</span>|<span class="block font-semibold text-2xl sm:text-3xl">:total</span> <span>followings</span>', 933, ['total' => number_format($user->data->friends_count)])</a>
             </p>
 
-            <div class="mb-4 px-2 text-center w-1/2 sm:w-1/3">
-                <p class="bg-gray-600 bg-opacity-30 p-4 rounded truncate">@choice('<span class="block font-semibold text-2xl sm:text-3xl">:total</span> <span>favorite</span>|<span class="block font-semibold text-2xl sm:text-3xl">:total</span> <span>favorites</span>', 2882, ['total' => number_format($user->data->favourites_count)])</p>
-            </div>
+            <p class="mb-4 px-2 text-center w-1/2 sm:w-1/3">
+                <a href="@route('favorites')" class="bg-gray-600 bg-opacity-30 hover:bg-opacity-50 block p-4 rounded truncate">@choice('<span class="block font-semibold text-2xl sm:text-3xl">:total</span> <span>favorite</span>|<span class="block font-semibold text-2xl sm:text-3xl">:total</span> <span>favorites</span>', 933, ['total' => number_format($user->data->favourites_count)])</a>
+            </p>
 
             <div class="mb-4 px-2 text-center w-1/2 sm:w-1/3">
                 <p class="bg-gray-600 bg-opacity-30 p-4 rounded truncate">
