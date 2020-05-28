@@ -31,8 +31,8 @@
             @endforeach
 
             <li class="mt-4 w-full md:w-auto">
-                <a href="@route('likes')" class="flex group items-stretch @if (Route::is('favorites')) text-white @else  hover:text-white @endif">
-                    <span class="relative rounded w-2 @if (Route::is('favorites')) bg-blue-500 @else bg-gray-600 bg-opacity-20 group-hover:bg-opacity-40 duration-200 @endif" style="top: -1px"></span>
+                <a href="@route('likes')" class="flex group items-stretch @if (Route::is('likes')) text-white @else  hover:text-white @endif">
+                    <span class="relative rounded w-2 @if (Route::is('likes')) bg-blue-500 @else bg-gray-600 bg-opacity-20 group-hover:bg-opacity-40 duration-200 @endif" style="top: -1px"></span>
 
                     <span class="ml-4">
                         <span class="flex font-semibold items-center">
