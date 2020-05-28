@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
-use App\Like;
+use App\Favorite;
 use App\Facades\Twitter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use App\Jobs\Traits\CallsTwitter;
 
-class FetchLikedTweets extends BaseJob
+class FetchFavoritedTweets extends BaseJob
 {
     use CallsTwitter;
 
@@ -20,7 +20,7 @@ class FetchLikedTweets extends BaseJob
         );
 
         do {
-            $parameters = ['count' => 200];
+            $parameters = ['count' => 200, 'tweet_mode' => 'extended'];
 
             if (! empty($response)) {
                 $parameters['max_id'] = Arr::last($response)->id;
@@ -34,22 +34,22 @@ class FetchLikedTweets extends BaseJob
                 break;
             }
 
-            $likes = ! empty($likes)
-                ? $likes->concat($response)
+            $favorites = ! empty($favorites)
+                ? $favorites->concat($response)
                 : collect($response);
         } while (true);
 
-        Like::whereUserId($this->user->id)->delete();
+        Favorite::whereUserId($this->user->id)->delete();
 
         // It seems like I'm doing something wrong and that I get duplicates from the
         // API. For now, I just ignore duplicate entries errors (they're not inserted
         // so my index is clean) and I'll see later if I can figure this out.
-        Like::insertOrIgnore($likes->map(function (object $like) {
+        Favorite::insertOrIgnore($favorites->map(function (object $favorite) {
             return [
-                'id'         => $like->id,
+                'id'         => $favorite->id,
                 'user_id'    => $this->user->id,
-                'data'       => json_encode($like),
-                'created_at' => Carbon::parse($like->created_at)->toDateTimeString(),
+                'data'       => json_encode($favorite),
+                'created_at' => Carbon::parse($favorite->created_at)->toDateTimeString(),
             ];
         })->toArray());
     }

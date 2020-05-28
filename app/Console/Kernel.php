@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
         })->everyFiveMinutes();
 
         $schedule->call(function () {
-            FetchLikedTweets::dispatch($user);
+            FetchFavoritedTweets::dispatch($user);
         })->everyFifteenMinutes();
     }
 

@@ -3,21 +3,21 @@
 namespace App\Console\Commands;
 
 use App\User;
-use App\Jobs\FetchLikedTweets;
 use Illuminate\Console\Command;
+use App\Jobs\FetchFavoritedTweets;
 
-class FetchLikedTweetsCommand extends Command
+class FetchFavoritedTweetsCommand extends Command
 {
-    protected $signature = 'fetch:likes';
+    protected $signature = 'fetch:favorites';
 
-    protected $description = 'Fetch likes';
+    protected $description = 'Fetch favorites';
 
     public function handle() : void
     {
         // Let's use a Lazy Collection to stay memory efficient.
         // https://laravel.com/docs/collections#lazy-collections
         User::cursor()->each(function (User $user) {
-            FetchLikedTweets::dispatch($user);
+            FetchFavoritedTweets::dispatch($user);
         });
     }
 }

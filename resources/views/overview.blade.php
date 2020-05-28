@@ -46,7 +46,7 @@
             </p>
 
             <div class="mb-4 px-2 text-center w-1/2 sm:w-1/3">
-                <p class="bg-gray-600 bg-opacity-30 p-4 rounded truncate">@choice('<span class="block font-semibold text-2xl sm:text-3xl">:total</span> <span>like</span>|<span class="block font-semibold text-2xl sm:text-3xl">:total</span> <span>likes</span>', 2882, ['total' => number_format($user->data->favourites_count)])</p>
+                <p class="bg-gray-600 bg-opacity-30 p-4 rounded truncate">@choice('<span class="block font-semibold text-2xl sm:text-3xl">:total</span> <span>favorite</span>|<span class="block font-semibold text-2xl sm:text-3xl">:total</span> <span>favorites</span>', 2882, ['total' => number_format($user->data->favourites_count)])</p>
             </div>
 
             <div class="mb-4 px-2 text-center w-1/2 sm:w-1/3">

@@ -8,8 +8,8 @@ use App\Jobs\FetchUser;
 use App\Jobs\FetchFriends;
 use App\Jobs\FetchFollowers;
 use App\Jobs\FetchMutedUsers;
-use App\Jobs\FetchLikedTweets;
 use App\Jobs\FetchBlockedUsers;
+use App\Jobs\FetchFavoritedTweets;
 use Illuminate\Support\Facades\Queue;
 
 class UserTest extends TestCase
@@ -22,7 +22,7 @@ class UserTest extends TestCase
         Queue::assertPushed(fn (FetchBlockedUsers $j) => $j->user->is($user));
         Queue::assertPushed(fn (FetchFollowers $j) => $j->user->is($user));
         Queue::assertPushed(fn (FetchFriends $j) => $j->user->is($user));
-        Queue::assertPushed(fn (FetchLikedTweets $j) => $j->user->is($user));
+        Queue::assertPushed(fn (FetchFavoritedTweets $j) => $j->user->is($user));
         Queue::assertPushed(fn (FetchMutedUsers $j) => $j->user->is($user));
         Queue::assertPushed(fn (FetchUser $j) => $j->user->is($user));
     }

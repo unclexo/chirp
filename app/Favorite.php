@@ -6,7 +6,7 @@ use App\Traits\Unguarded;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Like extends Model
+class Favorite extends Model
 {
     use Unguarded;
 

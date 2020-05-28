@@ -31,6 +31,21 @@
             @endforeach
 
             <li class="mt-4 w-full md:w-auto">
+                <a href="@route('favorites')" class="flex group items-stretch @if (Route::is('favorites')) text-white @else  hover:text-white @endif">
+                    <span class="relative rounded w-2 @if (Route::is('favorites')) bg-blue-500 @else bg-gray-600 bg-opacity-20 group-hover:bg-opacity-40 duration-200 @endif" style="top: -1px"></span>
+
+                    <span class="ml-4">
+                        <span class="flex font-semibold items-center">
+                            <x:zondicon-heart class="fill-current h-4 relative" style="top: -1px" />
+                            <span class="ml-2">Favorites</span>
+                        </span>
+
+                        <span class="block text-gray-500">Instant search any of the tweets added to your favorites.</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="mt-4 w-full md:w-auto">
                 <a href="@route('followers')" class="flex group items-stretch @if (Route::is('followers')) text-white @else  hover:text-white @endif">
                     <span class="relative rounded w-2 @if (Route::is('followers')) bg-blue-500 @else bg-gray-600 bg-opacity-20 group-hover:bg-opacity-40 duration-200 @endif" style="top: -1px"></span>
 
