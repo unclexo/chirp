@@ -18,7 +18,9 @@ class CreateFavoritesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
+        DB::statement("ALTER TABLE favorites ADD COLUMN author_name VARCHAR(255) GENERATED ALWAYS AS (data -> '$.user.name') STORED");
+        DB::statement("ALTER TABLE favorites ADD COLUMN author_screen_name VARCHAR(255) GENERATED ALWAYS AS (data -> '$.user.screen_name') STORED");
         DB::statement("ALTER TABLE favorites ADD COLUMN full_text LONGTEXT GENERATED ALWAYS AS (data -> '$.full_text') STORED");
-        DB::statement('CREATE FULLTEXT INDEX favorites_full_text_index ON favorites (full_text)');
+        DB::statement('CREATE FULLTEXT INDEX favorites_full_text_index ON favorites (author_name, author_screen_name, full_text) WITH PARSER ngram');
     }
 }

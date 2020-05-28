@@ -3,7 +3,7 @@
 
     <div class="mt-8">
         <form method="GET" action="@route('likes')" class="bg-gray-900 flex items-center justify-center rounded-full">
-            <input type="search" id="q" name="q" value="{{ old('q') ?? $q }}" placeholder="Search" class="appearance-none bg-transparent flex-grow pl-6 py-3 placeholder-gray-600 w-full">
+            <input type="search" id="q" name="q" value="{{ old('q') ?? $query }}" placeholder="Search" class="appearance-none bg-transparent flex-grow pl-6 py-3 placeholder-gray-600 w-full">
 
             <button type="submit" class="bg-blue-500 hover:bg-blue-400 font-bold px-8 py-3 rounded-full text-white">
                 Search
@@ -42,8 +42,8 @@
 
             <x-pagination :items="$likes" class="mt-8" />
         @else
-            @if ($q)
-                <p class="mt-8 text-center text-gray-500">Sorry, I couldn't find anything matching "{{ $q }}".</p>
+            @if ($query)
+                <p class="mt-8 text-center text-gray-500">Sorry, I couldn't find anything matching "{{ $query }}".</p>
             @else
                 <p class="mt-8 text-center text-gray-500">Either you don't have likes yet, or @config('app.name') is still gathering data.</p>
             @endif

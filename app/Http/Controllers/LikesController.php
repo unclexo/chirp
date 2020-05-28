@@ -14,13 +14,13 @@ class LikesController extends Controller
 
     public function __invoke(Request $request) : View
     {
-        $query = $request->user()->favorites()->latest();
+        $query = $request->user()->favorites();
+        $query = $request->q
+            ? $query->matching($request->q)
+            : $query->latest();
 
-        return view('likes')->withLikes(
-            $request->q
-                ? $query->whereRaw('MATCH(full_text) AGAINST(? IN NATURAL LANGUAGE MODE)', [$request->q])->paginate(30)
-                : $query->paginate(30)
-        )
-            ->withQ($request->q);
+        return view('likes')
+            ->withLikes($query->paginate(30))
+            ->withQuery($request->q);
     }
 }
