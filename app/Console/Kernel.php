@@ -7,6 +7,7 @@ use App\Jobs\FetchFriends;
 use App\Jobs\FetchFollowers;
 use App\Jobs\FetchMutedUsers;
 use App\Jobs\FetchBlockedUsers;
+use App\Jobs\FetchFavoritedTweets;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
