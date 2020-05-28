@@ -13,7 +13,7 @@
         @if ($likes->isNotEmpty())
             <ul class="mt-8">
                 @foreach ($likes as $like)
-                    <li class="bg-gray-700 mt-4 px-4 py-8 sm:p-8 rounded shadow">
+                    <li class="bg-gray-700 mt-4 px-4 py-8 sm:p-8 relative rounded shadow">
                         <div class="sm:flex sm:justify-between">
                             <a href="{{ $like->presenter->userUrl() }}" target="_blank" class="flex items-center sm:pr-4 hover:text-white">
                                 <img src="{{ $like->presenter->avatar() }}" width="48" height="48" class="flex-none rounded-full">
@@ -36,6 +36,8 @@
                         <p class="mt-6 text-center">
                             <a href="{{ $like->presenter->url() }}" target="_blank" rel="noopener" class="font-semibold hover:text-white">More on Twitter</a>
                         </p>
+
+                        <span class="-mx-2 absolute bg-red-500 block mt-2 p-2 right-0 sm:right-auto sm:left-0 rounded-sm shadow-sm top-0"><x:zondicon-heart class="fill-current h-4" /></span>
                     </li>
                 @endforeach
             </ul>
