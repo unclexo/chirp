@@ -9,6 +9,19 @@
         @if (! app()->environment('production'))
             <meta name="robots" content="noindex, nofollow">
         @endif
+        <meta property="og:locale" content="en">
+        <meta property="og:site_name" content="Chirp">
+        <meta property="og:type" content="website">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:creator" content="@benjamincrozat">
+        <meta name="twitter:site" content="@benjamincrozat">
+        <meta name="description" content="Chirp is a 100% free web application to manage your Twitter account.">
+        <meta property="og:title" content="chirp.benjamincrozat.com">
+        <meta property="og:description" content="Chirp is a 100% free web application to manage your Twitter account.">
+        <meta property="og:image" content="">
+        <meta name="twitter:title" content="Chirp">
+        <meta name="twitter:description" content="Chirp is a 100% free web application to manage your Twitter account.">
+        <meta name="twitter:image" content="">
 
         <link rel="stylesheet" href="@mix('/css/app.css')">
     </head>
