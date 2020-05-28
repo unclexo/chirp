@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\User;
 use App\Jobs\FetchUser;
 use App\Jobs\FetchFriends;
 use App\Jobs\FetchFollowers;
@@ -18,15 +19,19 @@ class Kernel extends ConsoleKernel
         // SQS doesn't support delayed jobs. We have to use the scheduler.
 
         $schedule->call(function () {
-            FetchBlockedUsers::dispatch($user);
-            FetchFollowers::dispatch($user);
-            FetchFriends::dispatch($user);
-            FetchMutedUsers::dispatch($user);
-            FetchUser::dispatch($user);
+            User::cursor()->each(function (User $user) {
+                FetchBlockedUsers::dispatch($user);
+                FetchFollowers::dispatch($user);
+                FetchFriends::dispatch($user);
+                FetchMutedUsers::dispatch($user);
+                FetchUser::dispatch($user);
+            });
         })->everyFiveMinutes();
 
         $schedule->call(function () {
-            FetchFavoritedTweets::dispatch($user);
+            User::cursor()->each(function (User $user) {
+                FetchFavoritedTweets::dispatch($user);
+            });
         })->everyFifteenMinutes();
     }
 
