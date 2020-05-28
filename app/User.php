@@ -22,4 +22,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Diff::class);
     }
+
+    public function likes() : HasMany
+    {
+        return $this->hasMany(Like::class);
+    }
 }

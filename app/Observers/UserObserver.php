@@ -7,6 +7,7 @@ use App\Jobs\FetchUser;
 use App\Jobs\FetchFriends;
 use App\Jobs\FetchFollowers;
 use App\Jobs\FetchMutedUsers;
+use App\Jobs\FetchLikedTweets;
 use App\Jobs\FetchBlockedUsers;
 
 // I'm using an observer here instead of closures inside the User model,
@@ -18,6 +19,7 @@ class UserObserver
         FetchBlockedUsers::dispatch($user);
         FetchFollowers::dispatch($user);
         FetchFriends::dispatch($user);
+        FetchLikedTweets::dispatch($user);
         FetchMutedUsers::dispatch($user);
         FetchUser::dispatch($user);
     }
