@@ -4,7 +4,7 @@
     @forelse ($diffs as $diffsForDay)
         <div class="bg-gray-700 mt-8 py-4 rounded">
             <h3 class="-mx-2 bg-blue-700 flex items-center font-semibold px-6 py-4 rounded-sm shadow">
-                <x:zondicon-calendar class="fill-current h-4 inline mr-3 relative" style="top: -2px" /> {{ Illuminate\Support\Carbon::parse($diffsForDay->date)->isoFormat('LL') }}
+                <x:zondicon-calendar class="fill-current h-4 inline mr-3 relative" style="top: -1px" /> {{ Illuminate\Support\Carbon::parse($diffsForDay->date)->isoFormat('LL') }}
             </h3>
 
             @php
