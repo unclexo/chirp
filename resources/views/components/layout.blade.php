@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
     <head>
-        <title>{{ $title ?? config('app.name') }}</title>
+        <title>
+            @if (! empty($title))
+                {{ $title }} — @config('app.name')
+            @else
+                @config('app.name') — A free Twitter activity tracker
+            @endif
+        </title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,7 +22,7 @@
         <meta name="twitter:creator" content="@benjamincrozat">
         <meta name="twitter:site" content="@benjamincrozat">
         <meta name="description" content="Chirp is a 100% free web application to manage your Twitter account.">
-        <meta property="og:title" content="Chirp — Manage your Twitter account, for free.">
+        <meta property="og:title" content="Chirp — A free Twitter activity tracker">
         <meta property="og:description" content="Chirp is a 100% free tool to manage your Twitter account. Track unfollowers, instant search through tweets you liked, etc.">
         <meta property="og:image" content="">
         <meta name="twitter:title" content="Chirp">
@@ -39,7 +45,7 @@
                         </a>
                     </h1>
 
-                    <h2 class="mt-2">Manage your Twitter account, for free.</h2>
+                    <h2 class="mt-2">A free Twitter activity tracker</h2>
                 </header>
 
                 <div class="@if (empty($hideSidebar)) md:flex @endif mt-8 md:mt-16">
