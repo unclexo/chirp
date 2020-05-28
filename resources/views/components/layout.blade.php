@@ -16,11 +16,11 @@
         <meta name="twitter:creator" content="@benjamincrozat">
         <meta name="twitter:site" content="@benjamincrozat">
         <meta name="description" content="Chirp is a 100% free web application to manage your Twitter account.">
-        <meta property="og:title" content="chirp.benjamincrozat.com">
-        <meta property="og:description" content="Chirp is a 100% free web application to manage your Twitter account.">
+        <meta property="og:title" content="Chirp — Manage your Twitter account, for free.">
+        <meta property="og:description" content="Chirp is a 100% free tool to manage your Twitter account. Track unfollowers, instant search through tweets you liked, etc.">
         <meta property="og:image" content="">
         <meta name="twitter:title" content="Chirp">
-        <meta name="twitter:description" content="Chirp is a 100% free web application to manage your Twitter account.">
+        <meta name="twitter:description" content="Chirp is a 100% free tool to manage your Twitter account. Track unfollowers, instant search through tweets you liked, etc.">
         <meta name="twitter:image" content="">
 
         <link rel="stylesheet" href="@mix('/css/app.css')">
@@ -39,7 +39,7 @@
                         </a>
                     </h1>
 
-                    <h2 class="mt-2">Manage your Twitter account for free.</h2>
+                    <h2 class="mt-2">Manage your Twitter account, for free.</h2>
                 </header>
 
                 <div class="@if (empty($hideSidebar)) md:flex @endif mt-8 md:mt-16">
