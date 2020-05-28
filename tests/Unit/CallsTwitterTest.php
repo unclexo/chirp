@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Jobs;
+namespace Tests\Unit;
 
 use App\User;
 use Exception;
@@ -28,7 +28,7 @@ class CallsTwitterTest extends TestCase
             ->shouldReceive('get')
             ->with('foo/bar')
             ->andReturn(
-                $data = json_decode(file_get_contents(__DIR__ . '/../json/error-404.json'))
+                $data = json_decode(file_get_contents(base_path('tests/json/error-404.json')))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(404);
@@ -48,7 +48,7 @@ class CallsTwitterTest extends TestCase
             ->shouldReceive('get')
             ->with('foo/bar')
             ->andReturn(
-                $data = json_decode(file_get_contents(__DIR__ . '/../json/error-403.json'))
+                $data = json_decode(file_get_contents(base_path('tests/json/error-403.json')))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(403);

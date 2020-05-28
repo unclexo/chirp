@@ -13,7 +13,7 @@ abstract class BaseJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected User $user;
+    public User $user;
 
     public $deleteWhenMissingModels = true;
 

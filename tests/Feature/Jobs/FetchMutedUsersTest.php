@@ -19,21 +19,21 @@ class FetchMutedUsersTest extends TestCase
             ->shouldReceive('get')
             ->with('mutes/users/ids', ['cursor' => -1])
             ->andReturn(
-                $data = json_decode(file_get_contents(__DIR__ . '/../../json/muted-ids.json'))
+                $data = json_decode(file_get_contents(base_path('tests/json/muted-ids.json')))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(200)
             ->shouldReceive('get')
             ->with('users/lookup', ['user_id' => implode(',', (array) $data->ids)])
             ->andReturn(
-                json_decode(file_get_contents(__DIR__ . '/../../json/users-lookup.json'))
+                json_decode(file_get_contents(base_path('tests/json/users-lookup.json')))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(200)
             ->shouldReceive('get')
             ->with('friendships/lookup', ['user_id' => implode(',', (array) $data->ids)])
             ->andReturn(
-                json_decode(file_get_contents(__DIR__ . '/../../json/friendships-lookup.json'))
+                json_decode(file_get_contents(base_path('tests/json/friendships-lookup.json')))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(200);
