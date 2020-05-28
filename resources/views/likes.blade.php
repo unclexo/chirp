@@ -14,7 +14,7 @@
             <ul class="mt-8">
                 @foreach ($likes as $like)
                     <li class="bg-gray-700 mt-4 px-4 py-8 sm:p-8 relative rounded shadow">
-                        <div class="sm:flex sm:justify-between">
+                        <div class="sm:flex sm:items-center sm:justify-between">
                             <a href="{{ $like->presenter->userUrl() }}" target="_blank" class="flex items-center sm:pr-4 hover:text-white">
                                 <img src="{{ $like->presenter->avatar() }}" width="48" height="48" class="flex-none rounded-full">
 
