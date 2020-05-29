@@ -8,6 +8,7 @@ use App\Http\Controllers\BlockedController;
 use App\Http\Controllers\OverviewController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\FollowersController;
+use App\Http\Controllers\DeleteUserController;
 use App\Http\Controllers\FollowingsController;
 use App\Http\Controllers\Auth\SocialiteController;
 
@@ -22,3 +23,4 @@ Route::get('/followings', FollowingsController::class)->name('followings');
 Route::get('/muted', MutedController::class)->name('muted');
 Route::get('/blocked', BlockedController::class)->name('blocked');
 Route::get('/settings', SettingsController::class)->name('settings');
+Route::delete('/user', DeleteUserController::class)->name('user.delete');
