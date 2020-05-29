@@ -19,7 +19,7 @@
     </p>
 
     @if ($tweet->presenter->media()->isNotEmpty())
-        <div class="flex mt-4">
+        <div class="flex mt-6">
             @foreach ($tweet->presenter->media() as $media)
                 <a href="{{ $media->url }}" class="@if (! $loop->first) ml-2 @endif flex-grow hover:opacity-75">
                     <img loading="lazy" src="{{ $media->media_url_https }}?name=medium" width="{{ $media->sizes->medium->w }}" height="{{ $media->sizes->medium->h }}" class="h-full object-center object-cover">
