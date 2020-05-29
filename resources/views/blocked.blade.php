@@ -6,7 +6,7 @@
             <ul>
                 @foreach ($blockedUsers as $blockedUser)
                     <li>
-                        <x-user-list-item :user="$blockedUser" />
+                        <x-user :user="$blockedUser" />
                     </li>
                 @endforeach
             </ul>

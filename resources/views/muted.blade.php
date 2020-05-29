@@ -6,7 +6,7 @@
             <ul>
                 @foreach ($mutedUsers as $mutedUser)
                     <li>
-                        <x-user-list-item :user="$mutedUser" />
+                        <x-user :user="$mutedUser" />
                     </li>
                 @endforeach
             </ul>

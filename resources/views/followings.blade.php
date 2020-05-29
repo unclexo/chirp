@@ -20,11 +20,11 @@
                         @foreach ($additionsForDay as $additions)
                             @foreach ($additions as $addition)
                                 <li>
-                                    <x-user-list-item :user="$addition">
+                                    <x-user :user="$addition">
                                         <x-slot name="icon">
                                             <x:zondicon-add-solid class="fill-current h-4 mr-4 text-green-500 w-4" />
                                         </x-slot>
-                                    </x-user-list-item>
+                                    </x-user>
                                 </li>
                             @endforeach
                         @endforeach
@@ -42,11 +42,11 @@
                         @foreach ($deletionsForDay as $deletions)
                             @foreach ($deletions as $deletion)
                                 <li>
-                                    <x-user-list-item :user="$deletion">
+                                    <x-user :user="$deletion">
                                         <x-slot name="icon">
                                             <x:zondicon-minus-solid class="fill-current h-4 mr-4 text-red-500 w-4" />
                                         </x-slot>
-                                    </x-user-list-item>
+                                    </x-user>
                                 </li>
                             @endforeach
                         @endforeach
