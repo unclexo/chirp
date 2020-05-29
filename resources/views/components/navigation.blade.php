@@ -13,25 +13,23 @@
 
     <div id="nav" class="bottom-0 fixed md:static hidden md:block left-0 md:mt-8 right-0 z-20">
         <ul class="bg-gray-800 md:bg-transparent h-screen tiny:h-90vh xs:h-75vh md:h-auto p-4 pb-32 md:p-0 overflow-y-scroll scrolling-touch">
-            @foreach (range(1, 1) as $i)
-                <li class="w-full md:w-auto">
-                    <a href="@route('overview')" class="flex group items-stretch @if (Route::is('overview')) text-white @else  hover:text-white @endif">
-                        <span class="relative rounded w-2 @if (Route::is('overview')) bg-blue-500 @else bg-gray-600 bg-opacity-20 group-hover:bg-opacity-40 duration-200 @endif" style="top: -1px"></span>
+            <li class="w-full md:w-auto">
+                <a href="@route('overview')" class="flex group items-stretch @if (Route::is('overview')) text-yellow-500 @else  hover:text-yellow-500 @endif">
+                    <span class="relative rounded w-2 @if (Route::is('overview')) bg-blue-500 @else bg-gray-600 bg-opacity-20 group-hover:bg-opacity-40 duration-200 @endif" style="top: -1px"></span>
 
-                        <span class="ml-4">
-                            <span class="flex font-semibold items-center">
-                                <x:zondicon-view-tile class="fill-current h-4 relative" style="top: -1px" />
-                                <span class="ml-2">Overview</span>
-                            </span>
-
-                            <span class="block text-gray-500">Bird's-eye view on your numbers.</span>
+                    <span class="ml-4">
+                        <span class="flex font-semibold items-center">
+                            <x:zondicon-view-tile class="fill-current h-4 relative" style="top: -1px" />
+                            <span class="ml-2">Overview</span>
                         </span>
-                    </a>
-                </li>
-            @endforeach
+
+                        <span class="block text-gray-500">Bird's-eye view on your numbers.</span>
+                    </span>
+                </a>
+            </li>
 
             <li class="mt-4 w-full md:w-auto">
-                <a href="@route('likes')" class="flex group items-stretch @if (Route::is('likes')) text-white @else  hover:text-white @endif">
+                <a href="@route('likes')" class="flex group items-stretch @if (Route::is('likes')) text-yellow-500 @else  hover:text-yellow-500 @endif">
                     <span class="relative rounded w-2 @if (Route::is('likes')) bg-blue-500 @else bg-gray-600 bg-opacity-20 group-hover:bg-opacity-40 duration-200 @endif" style="top: -1px"></span>
 
                     <span class="ml-4">
@@ -46,7 +44,7 @@
             </li>
 
             <li class="mt-4 w-full md:w-auto">
-                <a href="@route('followers')" class="flex group items-stretch @if (Route::is('followers')) text-white @else  hover:text-white @endif">
+                <a href="@route('followers')" class="flex group items-stretch @if (Route::is('followers')) text-yellow-500 @else  hover:text-yellow-500 @endif">
                     <span class="relative rounded w-2 @if (Route::is('followers')) bg-blue-500 @else bg-gray-600 bg-opacity-20 group-hover:bg-opacity-40 duration-200 @endif" style="top: -1px"></span>
 
                     <span class="ml-4">
@@ -61,7 +59,7 @@
             </li>
 
             <li class="mt-4 w-full md:w-auto">
-                <a href="@route('followings')" class="flex group items-stretch @if (Route::is('followings')) text-white @else  hover:text-white @endif">
+                <a href="@route('followings')" class="flex group items-stretch @if (Route::is('followings')) text-yellow-500 @else  hover:text-yellow-500 @endif">
                     <span class="relative rounded w-2 @if (Route::is('followings')) bg-blue-500 @else bg-gray-600 bg-opacity-20 group-hover:bg-opacity-40 duration-200 @endif" style="top: -1px"></span>
 
                     <span class="ml-4">
@@ -77,7 +75,7 @@
             </li>
 
             <li class="mt-4 w-full md:w-auto">
-                <a href="@route('muted')" class="flex group items-stretch @if (Route::is('muted')) text-white @else  hover:text-white @endif">
+                <a href="@route('muted')" class="flex group items-stretch @if (Route::is('muted')) text-yellow-500 @else  hover:text-yellow-500 @endif">
                     <span class="relative rounded w-2 @if (Route::is('muted')) bg-blue-500 @else bg-gray-600 bg-opacity-20 group-hover:bg-opacity-40 duration-200 @endif" style="top: -1px"></span>
 
                     <span class="ml-4">
@@ -92,7 +90,7 @@
             </li>
 
             <li class="mt-4 w-full md:w-auto">
-                <a href="@route('blocked')" class="flex group items-stretch @if (Route::is('blocked')) text-white @else  hover:text-white @endif">
+                <a href="@route('blocked')" class="flex group items-stretch @if (Route::is('blocked')) text-yellow-500 @else  hover:text-yellow-500 @endif">
                     <span class="relative rounded w-2 @if (Route::is('blocked')) bg-blue-500 @else bg-gray-600 bg-opacity-20 group-hover:bg-opacity-40 duration-200 @endif" style="top: -1px"></span>
 
                     <span class="ml-4">
@@ -107,7 +105,7 @@
             </li>
 
             <li class="mt-4 w-full md:w-auto">
-                <a href="@route('settings')" class="flex group items-stretch @if (Route::is('settings')) text-white @else  hover:text-white @endif">
+                <a href="@route('settings')" class="flex group items-stretch @if (Route::is('settings')) text-yellow-500 @else  hover:text-yellow-500 @endif">
                     <span class="relative rounded w-2 @if (Route::is('settings')) bg-blue-500 @else bg-gray-600 bg-opacity-20 group-hover:bg-opacity-40 duration-200 @endif" style="top: -1px"></span>
 
                     <span class="ml-4">
@@ -125,7 +123,7 @@
                 <form method="POST" action="@route('logout')">
                     @csrf
 
-                    <button type="submit" class="flex group items-stretch hover:text-white w-full">
+                    <button type="submit" class="flex group items-stretch hover:text-yellow-500 w-full">
                         <span class="bg-gray-600 bg-opacity-20 group-hover:bg-opacity-40 duration-200 block rounded w-2"></span>
                         <span class="block font-semibold ml-4">Log out</span>
                     </button>

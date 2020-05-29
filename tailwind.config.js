@@ -18,6 +18,10 @@ module.exports = {
         },
 
         extend: {
+            colors: {
+                'blue-chirp': '#2ab2ff',
+            },
+
             fontFamily: {
                 sans: ['Montserrat', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
             },

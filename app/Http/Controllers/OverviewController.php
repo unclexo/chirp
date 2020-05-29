@@ -37,7 +37,7 @@ class OverviewController extends Controller
     protected function expand(string $text, object $entities) : string
     {
         foreach ($entities->urls as $url) {
-            $text = str_replace($url->url, '<a href="' . $url->expanded_url . '" target="_blank" class="font-semibold hover:text-white">' . $url->display_url . '</a>', $text);
+            $text = str_replace($url->url, '<a href="' . $url->expanded_url . '" target="_blank" class="font-semibold hover:text-yellow-500">' . $url->display_url . '</a>', $text);
         }
 
         return $text;

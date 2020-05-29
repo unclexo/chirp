@@ -15,7 +15,7 @@
                 @if ($website['expanded_url'] && $website['display_url'])
                     <p class="flex items-center mt-4">
                         <x:zondicon-globe class="fill-current h-5 mr-3 relative" style="top: -1px" />
-                        <a href="{{ $website['expanded_url'] }}" target="_blank" class="font-semibold hover:text-white">{{ $website['display_url'] }}</a>
+                        <a href="{{ $website['expanded_url'] }}" target="_blank" class="font-semibold hover:text-yellow-500">{{ $website['display_url'] }}</a>
                     </p>
                 @endif
 
@@ -82,7 +82,7 @@
         </a>
     @else
         <div class="mt-16 text-center">
-            <a href="@route('login')" class="bg-blue-500 hover:bg-blue-400 font-semibold inline-block px-8 py-4 rounded text-blue-100 hover:text-white">
+            <a href="@route('login')" class="bg-blue-500 hover:bg-blue-400 font-semibold inline-block px-8 py-4 rounded text-blue-100 hover:text-yellow-500">
                 Sign in with Twitter
             </a>
         </div>

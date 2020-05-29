@@ -1,6 +1,6 @@
 <div class="bg-gray-700 px-4 py-8 sm:p-8 relative rounded shadow">
     <div class="sm:flex sm:items-center sm:justify-between">
-        <a href="{{ $tweet->presenter->userUrl() }}" target="_blank" class="flex items-center sm:pr-4 hover:text-white">
+        <a href="{{ $tweet->presenter->userUrl() }}" target="_blank" class="flex items-center sm:pr-4 hover:text-yellow-500">
             <img src="{{ $tweet->presenter->avatar() }}" width="48" height="48" class="flex-none rounded-full">
 
             <div class="leading-tight pl-4">
@@ -29,7 +29,7 @@
     @endif
 
     <p class="mt-8 text-center">
-        <a href="{{ $tweet->presenter->url() }}" target="_blank" rel="noopener" class="font-semibold hover:text-white">More on Twitter</a>
+        <a href="{{ $tweet->presenter->url() }}" target="_blank" rel="noopener" class="font-semibold hover:text-yellow-500">More on Twitter</a>
     </p>
 
     <span class="-mx-2 absolute bg-red-500 block mt-2 p-2 right-0 sm:right-auto sm:left-0 rounded-sm shadow-sm top-0"><x:zondicon-heart class="fill-current h-4" /></span>

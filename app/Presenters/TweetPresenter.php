@@ -66,12 +66,12 @@ class TweetPresenter
 
         foreach ($this->tweet->entities->user_mentions as $mention) {
             $stringsToReplace[]    = mb_substr($text, $mention->indices[0], $mention->indices[1] - $mention->indices[0]);
-            $stringsReplacements[] = '<a href="https://twitter.com/' . $mention->screen_name . '" target="_blank" rel="noopener" class="font-semibold hover:text-white">@' . $mention->screen_name . '</a>';
+            $stringsReplacements[] = '<a href="https://twitter.com/' . $mention->screen_name . '" target="_blank" rel="noopener" class="font-semibold hover:text-yellow-500">@' . $mention->screen_name . '</a>';
         }
 
         foreach ($this->tweet->entities->hashtags as $hashtag) {
             $stringsToReplace[]    = mb_substr($text, $hashtag->indices[0], $hashtag->indices[1] - $hashtag->indices[0]);
-            $stringsReplacements[] = '<a href="https://twitter.com/hashtag/' . $hashtag->text . '" target="_blank" rel="noopener" class="font-semibold hover:text-white">#' . $hashtag->text . '</a>';
+            $stringsReplacements[] = '<a href="https://twitter.com/hashtag/' . $hashtag->text . '" target="_blank" rel="noopener" class="font-semibold hover:text-yellow-500">#' . $hashtag->text . '</a>';
         }
 
         foreach ($stringsToReplace as $key => $stringToReplace) {
@@ -84,7 +84,7 @@ class TweetPresenter
     protected function renderLinks(string $text) : string
     {
         foreach ($this->tweet->entities->urls as $url) {
-            $text = mb_ereg_replace($url->url, '<a href="' . $url->url . '" target="_blank" rel="noopener" class="font-semibold hover:text-white">' . $url->display_url . '</a>', $text);
+            $text = mb_ereg_replace($url->url, '<a href="' . $url->url . '" target="_blank" rel="noopener" class="font-semibold hover:text-yellow-500">' . $url->display_url . '</a>', $text);
         }
 
         return $text;
