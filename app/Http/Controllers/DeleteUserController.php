@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class DeleteUserController extends Controller
 {
@@ -12,7 +12,7 @@ class DeleteUserController extends Controller
         $this->middleware('auth');
     }
 
-    public function __invoke(Request $request) : View
+    public function __invoke(Request $request) : RedirectResponse
     {
         $request->user()->delete();
 

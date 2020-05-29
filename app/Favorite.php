@@ -12,6 +12,8 @@ class Favorite extends Model
 {
     use Unguarded;
 
+    public $timestamps = false;
+
     protected $casts = [
         'data' => 'object',
     ];
