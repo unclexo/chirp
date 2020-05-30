@@ -5,7 +5,7 @@
         <form method="GET" action="@route('likes')" class="bg-gray-900 flex items-center justify-center rounded-full">
             <label for="q" class="sr-only">Search:</label>
 
-            <input type="search" id="q" name="q" value="{{ old('q') ?? $query }}" placeholder="Laravel, Eloquent, etc." class="appearance-none bg-transparent flex-grow pl-6 py-3 placeholder-gray-600 w-full">
+            <input type="search" id="q" name="q" value="{{ old('q') ?? $query }}" placeholder="Type some keywords." class="appearance-none bg-transparent flex-grow pl-6 py-3 placeholder-gray-600 w-full">
 
             <button type="submit" class="bg-blue-500 hover:bg-blue-400 font-bold px-8 py-3 rounded-full text-white">
                 Search
@@ -16,7 +16,7 @@
             <ul class="mt-8">
                 @foreach ($likes as $like)
                     <li class="mt-4">
-                        <x-tweet :tweet="$like" />
+                        <x-tweet :tweet="$like->presenter" />
                     </li>
                 @endforeach
             </ul>

@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\Unguarded;
+use App\Presenters\UserPresenter;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -28,5 +29,10 @@ class User extends Authenticatable
     public function favorites() : HasMany
     {
         return $this->hasMany(Favorite::class);
+    }
+
+    public function getPresenterAttribute() : UserPresenter
+    {
+        return new UserPresenter($this->data);
     }
 }
