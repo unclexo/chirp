@@ -28,8 +28,15 @@
         <meta name="twitter:title" content="Chirp">
         <meta name="twitter:description" content="Chirp is a 100% free tool to manage your Twitter account. Track unfollowers, instant search through tweets you liked, etc.">
         <meta name="twitter:image" content="">
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="stylesheet" href="@mix('/css/app.css')">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
     </head>
     <body class="bg-gray-900 text-gray-400">
         <a href="https://github.com/sponsors/benjamincrozat" target="_blank" class="bg-green-600 hover:bg-opacity-75 block py-4 text-center">
