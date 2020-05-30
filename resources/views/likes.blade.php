@@ -1,5 +1,5 @@
 <x-layout>
-    <h2 class="font-semibold leading-none text-xl">Likes</h2>
+    <h2 class="font-semibold leading-none text-center text-xl">Likes</h2>
 
     <div class="mt-8">
         <form method="GET" action="@route('likes')" class="bg-gray-900 flex items-center justify-center rounded-full">

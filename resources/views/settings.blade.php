@@ -1,5 +1,5 @@
 <x-layout>
-    <h3 class="font-semibold leading-none text-xl">Settings</h3>
+    <h3 class="font-semibold leading-none text-center text-xl">Settings</h3>
 
     <form method="POST" action="@route('user.delete')" class="bg-gray-700 bg-opacity-50 mt-8 px-4 py-8 lg:p-8 rounded shadow">
         @csrf

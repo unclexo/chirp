@@ -1,5 +1,5 @@
 <x-layout>
-    <h2 class="font-semibold leading-none text-xl">Followers history</h2>
+    <h2 class="font-semibold leading-none text-center text-xl">Followers history</h2>
 
     @forelse ($diffs as $diffsForDay)
         <div class="bg-gray-700 mt-8 py-4 rounded">
