@@ -12,7 +12,7 @@
     </button>
 
     <div id="nav" class="bottom-0 fixed md:static hidden md:block left-0 md:mt-8 right-0 z-20">
-        <ul class="bg-gray-800 md:bg-transparent h-screen tiny:h-90vh xs:h-75vh md:h-auto p-4 pb-32 md:p-0 overflow-y-scroll scrolling-touch">
+        <ul class="bg-gray-800 md:bg-transparent h-screen tiny:h-90vh xs:h-75vh md:h-auto p-4 pb-32 md:p-0 overflow-y-auto sm:overflow-y-visible scrolling-touch">
             <li class="w-full md:w-auto">
                 <a href="@route('overview')" class="flex group items-stretch @if (Route::is('overview')) text-yellow-500 @else  hover:text-yellow-500 @endif">
                     <span class="relative rounded w-2 @if (Route::is('overview')) bg-blue-500 @else bg-gray-600 bg-opacity-20 group-hover:bg-opacity-40 duration-200 @endif" style="top: -1px"></span>
