@@ -22,26 +22,6 @@ class CallsTwitterTest extends TestCase
     }
 
     /** @test */
-    public function it_throws_an_exception_when_twitter_returns_an_error() : void
-    {
-        Twitter::shouldReceive('setOauthToken')
-            ->shouldReceive('get')
-            ->with('foo/bar')
-            ->andReturn(
-                $data = json_decode(file_get_contents(base_path('tests/json/error-404.json')))
-            )
-            ->shouldReceive('getLastHttpCode')
-            ->andReturn(404);
-
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('Sorry, this page does not exist.');
-
-        $this->checkForTwitterErrors(
-            Twitter::get('foo/bar')
-        );
-    }
-
-    /** @test */
     public function it_deletes_an_user_when_tokens_have_been_invalidated() : void
     {
         Twitter::shouldReceive('setOauthToken')
