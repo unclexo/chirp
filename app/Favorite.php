@@ -21,9 +21,8 @@ class Favorite extends Model
     public function scopeMatching(Builder $queryBuilder, string $query) : Builder
     {
         return $queryBuilder
-            ->select('*')
             ->selectRaw(
-                'MATCH(author_name, author_screen_name, full_text) AGAINST (? IN BOOLEAN MODE) AS score',
+                '*, MATCH(author_name, author_screen_name, full_text) AGAINST (? IN BOOLEAN MODE) AS score',
                 [$query]
             )
             ->whereRaw(
