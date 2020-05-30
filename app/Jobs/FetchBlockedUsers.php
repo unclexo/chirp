@@ -17,8 +17,8 @@ class FetchBlockedUsers extends BaseJob
         );
 
         do {
-            $this->checkForTwitterErrors(
-                $response = Twitter::get('blocks/ids', [
+            $response = $this->checkForTwitterErrors(
+                Twitter::get('blocks/ids', [
                     'cursor' => $response->next_cursor ?? -1,
                 ])
             );

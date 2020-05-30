@@ -17,8 +17,8 @@ class FetchMutedUsers extends BaseJob
         );
 
         do {
-            $this->checkForTwitterErrors(
-                $response = Twitter::get('mutes/users/ids', [
+            $response = $this->checkForTwitterErrors(
+                Twitter::get('mutes/users/ids', [
                     'cursor' => $response->next_cursor ?? -1,
                 ])
             );

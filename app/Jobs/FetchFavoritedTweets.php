@@ -26,8 +26,8 @@ class FetchFavoritedTweets extends BaseJob
                 $parameters['max_id'] = Arr::last($response)->id;
             }
 
-            $this->checkForTwitterErrors(
-                $response = Twitter::get('favorites/list', $parameters)
+            $response = $this->checkForTwitterErrors(
+                Twitter::get('favorites/list', $parameters)
             );
 
             if (($parameters['max_id'] ?? 0) === Arr::last($response)->id) {
