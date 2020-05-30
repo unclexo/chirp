@@ -40,10 +40,10 @@
             <div class="container">
                 <a href="@route('home')">
                     <header class="flex items-center justify-center">
-                        <img src="@secureAsset('img/icon.png')" class="h-20" style="border-radius: 0.75rem">
+                        <img src="@secureAsset('img/icon.png')" class="h-20 relative rounded-full" style="top: -.1rem">
 
                         <div class="pl-6">
-                            <h1 class="font-semibold leading-none text-3xl" style="color: #4FBEFF">
+                            <h1 class="font-semibold leading-none text-3xl text-white">
                                 @config('app.name')
                             </h1>
 
