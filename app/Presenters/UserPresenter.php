@@ -21,14 +21,18 @@ class UserPresenter extends BasePresenter
         return $this->render('description');
     }
 
-    public function websiteDisplayUrl() : string
+    public function websiteDisplayUrl() : ?string
     {
-        return $this->entities->url->urls[0]->display_url;
+        return optional(
+            optional($this->entities->url->urls)[0]
+        )->display_url;
     }
 
-    public function websiteUrl() : string
+    public function websiteUrl() : ?string
     {
-        return $this->entities->url->urls[0]->url;
+        return optional(
+            optional($this->entities->url->urls)[0]
+        )->url;
     }
 
     public function __call($name, $arguments)

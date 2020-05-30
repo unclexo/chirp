@@ -28,7 +28,7 @@ class CallsTwitterTest extends TestCase
             ->shouldReceive('get')
             ->with('foo/bar')
             ->andReturn(
-                $data = json_decode(file_get_contents(base_path('tests/json/error-403.json')))
+                $data = json_decode(file_get_contents(base_path('database/json/error-403.json')))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(403);

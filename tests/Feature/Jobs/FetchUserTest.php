@@ -6,12 +6,9 @@ use App\User;
 use Tests\TestCase;
 use App\Jobs\FetchUser;
 use App\Facades\Twitter;
-use Illuminate\Foundation\Testing\WithFaker;
 
 class FetchUserTest extends TestCase
 {
-    use WithFaker;
-
     /** @test */
     public function it_fetches_users() : void
     {
@@ -19,14 +16,14 @@ class FetchUserTest extends TestCase
             ->shouldReceive('get')
             ->with('account/verify_credentials')
             ->andReturn(
-                json_decode(file_get_contents(base_path('tests/json/account-verify_credentials.json')))
+                json_decode(file_get_contents(base_path('database/json/account-verify_credentials.json')))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(200)
             ->shouldReceive('get')
             ->with('account/settings')
             ->andReturn(
-                json_decode(file_get_contents(base_path('tests/json/account-settings.json')))
+                json_decode(file_get_contents(base_path('database/json/account-settings.json')))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(200);

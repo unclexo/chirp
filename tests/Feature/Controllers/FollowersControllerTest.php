@@ -5,12 +5,9 @@ namespace Tests\Feature\Controllers;
 use App\Diff;
 use App\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 
 class FollowersControllerTest extends TestCase
 {
-    use WithFaker;
-
     /** @test */
     public function it_works() : void
     {
