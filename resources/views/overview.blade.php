@@ -12,8 +12,8 @@
             @endif
 
             @if (
-                $websiteUrl = $user->websiteUrl() &&
-                $displayUrl = $user->websiteDisplayUrl()
+                ($websiteUrl = $user->websiteUrl()) &&
+                ($displayUrl = $user->websiteDisplayUrl())
             )
                 <p class="flex items-center mt-4">
                     <x:zondicon-globe class="fill-current h-5 mr-3 relative" style="top: -1px" />
