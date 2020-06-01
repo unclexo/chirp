@@ -14,6 +14,11 @@ class FetchFavorites extends BaseJob
 
     protected Collection $favorites;
 
+    public function __construct()
+    {
+        $this->favorites = new Collection;
+    }
+
     public function handle() : void
     {
         $this
@@ -74,8 +79,6 @@ class FetchFavorites extends BaseJob
                 'data'    => json_encode($favorite),
             ];
         })->toArray());
-
-        dump($new->count());
 
         return $this;
     }
