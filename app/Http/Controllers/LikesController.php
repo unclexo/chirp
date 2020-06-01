@@ -14,11 +14,12 @@ class LikesController extends Controller
 
     public function __invoke(Request $request) : View
     {
+        $query = $request->q
+            ? $request->user()->favorites()->matching($request->q)
+            : $request->user()->favorites()->latest();
+
         return view('likes')
-            ->withLikes($query = $request->q
-                ? $request->user()->favorites()->matching($request->q)->simplePaginate(30)
-                : $request->user()->favorites()->latest()->paginate(30)
-            )
+            ->withLikes($query->paginate(30))
             ->withQuery($request->q);
     }
 }
