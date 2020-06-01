@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\User;
 use App\Favorite;
 use Illuminate\Support\Arr;
 use App\Jobs\Traits\CallsTwitter;
@@ -14,8 +15,10 @@ class FetchFavorites extends BaseJob
 
     protected Collection $favorites;
 
-    public function __construct()
+    public function __construct(User $user)
     {
+        parent::__construct($user);
+
         $this->favorites = new Collection;
     }
 
