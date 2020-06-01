@@ -39,9 +39,11 @@
         <meta name="msapplication-TileColor" content="#da532c">
     </head>
     <body class="bg-gray-900 text-gray-400">
-        <a href="https://github.com/sponsors/benjamincrozat" target="_blank" class="bg-green-600 hover:bg-opacity-75 block py-4 text-center">
-            <span class="block container">Sponsor @config('app.name')'s developer on GitHub and <strong>get access to the source code</strong> to see how this serverless app works! →</span>
-        </a>
+        <p class="container py-4 text-center">
+            <a href="https://github.com/sponsors/benjamincrozat" target="_blank">
+                <span class="block container">Sponsor @config('app.name')'s developer on GitHub and <strong>get access to the source code</strong> to see how this serverless app works! →</span>
+            </a>
+        </p>
 
         <div class="py-8 md:py-16" style="background-image: linear-gradient(#2e3748, rgba(74, 85, 104, .5))">
             <div class="container">
