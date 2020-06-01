@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->json('friends');
             $table->json('muted');
             $table->json('blocked');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
