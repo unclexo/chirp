@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Facades\Twitter;
 use App\Jobs\Traits\MakesDiffs;
 
 class FetchFollowers extends BaseJob
@@ -11,11 +10,6 @@ class FetchFollowers extends BaseJob
 
     public function handle() : void
     {
-        Twitter::setOauthToken(
-            $this->user->token,
-            $this->user->token_secret
-        );
-
         $this->makeDiffFor('followers');
     }
 }

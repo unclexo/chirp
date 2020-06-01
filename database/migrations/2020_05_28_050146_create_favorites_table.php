@@ -10,10 +10,9 @@ class CreateFavoritesTable extends Migration
     public function up() : void
     {
         Schema::create('favorites', function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->unique();
+            $table->unsignedBigInteger('id');
             $table->unsignedBigInteger('user_id')->index();
             $table->json('data');
-            $table->timestamp('created_at');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

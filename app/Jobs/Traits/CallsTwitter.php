@@ -6,14 +6,30 @@ use App\User;
 use Exception;
 use App\Facades\Twitter;
 use Illuminate\Support\Arr;
+use Abraham\TwitterOAuth\TwitterOAuth;
 
 trait CallsTwitter
 {
+    /**
+     * Going through this method allows us to always access a fully set up TwitterOAuth object.
+     * Putting `Twitter::setOauthToken()` in the constructor isn't possible because the job
+     * is already initialized when it's being unserialized by Laravel coming from SQS.
+     */
+    protected function twitter() : TwitterOAuth
+    {
+        Twitter::setOauthToken(
+            $this->user->token,
+            $this->user->token_secret
+        );
+
+        return Twitter::getFacadeRoot();
+    }
+
     public function getIdsFor(string $endpoint) : array
     {
         do {
             $response = $this->checkForTwitterErrors(
-                Twitter::get("$endpoint/ids", [
+                $this->twitter()->get("$endpoint/ids", [
                     'cursor' => $response->next_cursor ?? -1,
                 ])
             );
@@ -50,7 +66,7 @@ trait CallsTwitter
     {
         return Arr::collapse(array_map(function (array $ids) {
             $users = $this->checkForTwitterErrors(
-                Twitter::get('users/lookup', [
+                $this->twitter()->get('users/lookup', [
                     'user_id' => implode(',', $ids),
                 ])
             );
@@ -67,7 +83,7 @@ trait CallsTwitter
     {
         return Arr::collapse(array_map(function (array $ids) {
             $friendships = $this->checkForTwitterErrors(
-                Twitter::get('friendships/lookup', [
+                $this->twitter()->get('friendships/lookup', [
                     'user_id' => implode(',', $ids),
                 ])
             );
@@ -85,11 +101,11 @@ trait CallsTwitter
      */
     protected function checkForTwitterErrors($response)
     {
-        if (200 === Twitter::getLastHttpCode()) {
+        if (200 === $this->twitter()->getLastHttpCode()) {
             return $response;
         }
 
-        if (404 === Twitter::getLastHttpCode()) {
+        if (404 === $this->twitter()->getLastHttpCode()) {
             return;
         }
 

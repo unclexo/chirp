@@ -5,10 +5,10 @@ namespace App\Console;
 use App\User;
 use App\Jobs\FetchUser;
 use App\Jobs\FetchFriends;
+use App\Jobs\FetchFavorites;
 use App\Jobs\FetchFollowers;
 use App\Jobs\FetchMutedUsers;
 use App\Jobs\FetchBlockedUsers;
-use App\Jobs\FetchFavoritedTweets;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () {
             User::cursor()->each(function (User $user) {
-                FetchFavoritedTweets::dispatch($user);
+                FetchFavorites::dispatch($user);
             });
         })->everyTenMinutes();
     }

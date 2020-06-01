@@ -7,8 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Favorite::class, function (Faker $faker) {
     return [
-        'id'         => $faker->randomNumber(),
-        'data'       => [],
-        'created_at' => now(),
+        'id'   => $faker->randomNumber(),
+        'data' => [],
     ];
 });

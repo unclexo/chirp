@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Facades\Twitter;
 use App\Jobs\Traits\CallsTwitter;
 
 class FetchMutedUsers extends BaseJob
@@ -11,14 +10,9 @@ class FetchMutedUsers extends BaseJob
 
     public function handle() : void
     {
-        Twitter::setOauthToken(
-            $this->user->token,
-            $this->user->token_secret
-        );
-
         do {
             $response = $this->checkForTwitterErrors(
-                Twitter::get('mutes/users/ids', [
+                $this->twitter()->get('mutes/users/ids', [
                     'cursor' => $response->next_cursor ?? -1,
                 ])
             );
