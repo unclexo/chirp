@@ -7,25 +7,25 @@ use Illuminate\Support\Carbon;
 
 class DiffPresenter
 {
-    protected object $diff;
+    public object $data;
 
-    public function __construct(object $diff)
+    public function __construct(object $data)
     {
-        $this->diff = $diff;
+        $this->data = $data;
     }
 
     public function date() : string
     {
-        return Carbon::parse($this->diff->date)->isoFormat('LL');
+        return Carbon::parse($this->data->date)->isoFormat('LL');
     }
 
     public function additions() : array
     {
-        return Arr::collapse(json_decode($this->diff->additions, true));
+        return Arr::collapse(json_decode($this->data->additions, true));
     }
 
     public function deletions() : array
     {
-        return Arr::collapse(json_decode($this->diff->deletions, true));
+        return Arr::collapse(json_decode($this->data->deletions, true));
     }
 }

@@ -5,6 +5,7 @@ namespace Tests\Feature\Controllers;
 use App\Diff;
 use App\User;
 use Tests\TestCase;
+use App\Presenters\DiffPresenter;
 
 class FollowersControllerTest extends TestCase
 {
@@ -33,13 +34,13 @@ class FollowersControllerTest extends TestCase
         // Make sure I get diffs for 3 different dates.
         $this->assertCount(3, $diffs);
 
-        $response->original->diffs->each(function (object $diff) use ($user) {
+        $response->original->diffs->each(function (DiffPresenter $diff) use ($user) {
             // Make sure I got diffs for the correct user.
-            $this->assertEquals($diff->user_id, $user->id);
+            $this->assertEquals($diff->data->user_id, $user->id);
 
             // I created 5 diffs for each day. Make sure they're all present.
-            $this->assertCount(5, json_decode($diff->additions));
-            $this->assertCount(5, json_decode($diff->deletions));
+            $this->assertCount(5, $diff->additions());
+            $this->assertCount(5, $diff->deletions());
         });
     }
 }

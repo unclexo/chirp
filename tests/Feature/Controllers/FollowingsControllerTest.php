@@ -35,11 +35,11 @@ class FollowingsControllerTest extends TestCase
 
         $response->original->diffs->each(function (object $diff) use ($user) {
             // Make sure I got diffs for the correct user.
-            $this->assertEquals($diff->user_id, $user->id);
+            $this->assertEquals($diff->data->user_id, $user->id);
 
             // I created 5 diffs for each day. Make sure they're all present.
-            $this->assertCount(5, json_decode($diff->additions));
-            $this->assertCount(5, json_decode($diff->deletions));
+            $this->assertCount(5, $diff->additions());
+            $this->assertCount(5, $diff->deletions());
         });
     }
 }
