@@ -32,16 +32,12 @@ class UserPresenter
 
     public function websiteDisplayUrl() : ?string
     {
-        return optional(
-            optional($this->data->entities->url->urls)[0]
-        )->display_url;
+        return optional(optional(optional($this->data->entities->url)->urls)[0])->display_url;
     }
 
     public function websiteUrl() : ?string
     {
-        return optional(
-            optional($this->data->entities->url->urls)[0]
-        )->url;
+        return optional(optional(optional($this->data->entities->url)->urls)[0])->url;
     }
 
     protected function render(string $key) : string
