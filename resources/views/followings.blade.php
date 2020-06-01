@@ -8,25 +8,23 @@
             </h3>
 
             @php
-                $additionsForDay = json_decode($diffsForDay->additions, true);
-                $deletionsForDay = json_decode($diffsForDay->deletions, true);
+                $additionsForDay = Illuminate\Support\Arr::collapse(json_decode($diffsForDay->additions, true));
+                $deletionsForDay = Illuminate\Support\Arr::collapse(json_decode($diffsForDay->deletions, true));
             @endphp
 
             <div class="mt-4">
                 <h4 class="font-semibold px-4">New people you subscribed to</h4>
 
-                @if ($additionsForDay)
+                @if (! empty($additionsForDay))
                     <ul class="mt-4">
-                        @foreach ($additionsForDay as $additions)
-                            @foreach ($additions as $addition)
-                                <li>
-                                    <x-user :user="$addition">
-                                        <x-slot name="icon">
-                                            <x:zondicon-add-solid class="fill-current h-4 mr-4 text-green-500 w-4" />
-                                        </x-slot>
-                                    </x-user>
-                                </li>
-                            @endforeach
+                        @foreach ($additionsForDay as $addition)
+                            <li>
+                                <x-user :user="$addition">
+                                    <x-slot name="icon">
+                                        <x:zondicon-add-solid class="fill-current h-4 mr-4 text-green-500 w-4" />
+                                    </x-slot>
+                                </x-user>
+                            </li>
                         @endforeach
                     </ul>
                 @else
@@ -37,18 +35,16 @@
             <div class="mt-4">
                 <h4 class="font-semibold px-4">People you unsubscribed from</h4>
 
-                 @if ($deletionsForDay)
+                 @if (! empty($deletionsForDay))
                     <ul class="mt-4">
-                        @foreach ($deletionsForDay as $deletions)
-                            @foreach ($deletions as $deletion)
-                                <li>
-                                    <x-user :user="$deletion">
-                                        <x-slot name="icon">
-                                            <x:zondicon-minus-solid class="fill-current h-4 mr-4 text-red-500 w-4" />
-                                        </x-slot>
-                                    </x-user>
-                                </li>
-                            @endforeach
+                        @foreach ($deletionsForDay as $deletion)
+                            <li>
+                                <x-user :user="$deletion">
+                                    <x-slot name="icon">
+                                        <x:zondicon-minus-solid class="fill-current h-4 mr-4 text-red-500 w-4" />
+                                    </x-slot>
+                                </x-user>
+                            </li>
                         @endforeach
                     </ul>
                 @else
