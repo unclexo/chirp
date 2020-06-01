@@ -25,7 +25,7 @@ class UserPresenter
         return Carbon::parse($this->data->created_at)->isoFormat('LL');
     }
 
-    public function description() : string
+    public function description() : ?string
     {
         return $this->render('description');
     }
@@ -37,11 +37,15 @@ class UserPresenter
 
     public function websiteUrl() : ?string
     {
-        return optional(optional(optional(optional($this->data->entities)->url)->urls)[0])->url;
+        return $this->data->url ?? null;
     }
 
-    protected function render(string $key) : string
+    protected function render(string $key) : ?string
     {
+        if (empty($this->data->{$key})) {
+            return null;
+        }
+
         $text = $this->data->{$key};
 
         foreach ($this->data->entities->$key->urls as $url) {

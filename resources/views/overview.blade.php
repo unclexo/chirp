@@ -11,22 +11,17 @@
                 <p class="italic my-4">{!! $description !!}</p>
             @endif
 
-            @if (
-                ($websiteUrl = $user->presenter->websiteUrl()) &&
-                ($displayUrl = $user->presenter->websiteDisplayUrl())
-            )
-                <p class="flex items-center mt-4">
-                    <x:zondicon-globe class="fill-current h-5 mr-3 relative" style="top: -1px" />
+            <p class="flex items-center mt-4">
+                <x:zondicon-globe class="fill-current h-5 mr-3 relative" style="top: -1px" />
 
-                    <a
-                        href="{{ $websiteUrl }}"
-                        target="_blank"
-                        class="font-semibold hover:text-yellow-500"
-                    >
-                        {{ $displayUrl }}
-                    </a>
-                </p>
-            @endif
+                <a
+                    href="{{ $user->presenter->websiteUrl() }}"
+                    target="_blank"
+                    class="font-semibold hover:text-yellow-500"
+                >
+                    {{ $user->presenter->websiteDisplayUrl() }}
+                </a>
+            </p>
 
             @if ($user->data->location)
                 <p class="flex items-center mt-2">
