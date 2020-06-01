@@ -26,7 +26,7 @@
             @if ($query)
                 <p class="mt-8 text-center text-gray-500">Sorry, I couldn't find anything matching "{{ $query }}".</p>
             @else
-                <p class="mt-8 text-center text-gray-500">Either you don't have likes yet, or @config('app.name') is still gathering data.</p>
+                <p class="mt-8 text-center text-gray-500">I'm still gathering data… Please come back in a few minutes.</p>
             @endif
         @endif
     </div>

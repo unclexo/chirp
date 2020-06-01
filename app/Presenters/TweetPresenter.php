@@ -24,7 +24,7 @@ class TweetPresenter extends BasePresenter
 
     public function url() : string
     {
-        return "https://twitter.com/{$this->screen_name}/status/{$this->id}";
+        return "https://twitter.com/{$this->user->screen_name}/status/{$this->id}";
     }
 
     public function userAvatar() : string
@@ -34,7 +34,7 @@ class TweetPresenter extends BasePresenter
 
     public function userUrl() : string
     {
-        return "https://twitter.com/{$this->screen_name}";
+        return "https://twitter.com/{$this->user->screen_name}";
     }
 
     protected function render(string $key) : string
