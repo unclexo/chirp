@@ -8,7 +8,7 @@ class UserPresenter extends BasePresenter
 {
     public function avatar() : string
     {
-        return $this->profile_image_url_https;
+        return str_replace('_normal', '', $this->profile_image_url_https);
     }
 
     public function date() : string
