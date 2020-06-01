@@ -4,16 +4,25 @@ namespace App\Presenters;
 
 use Illuminate\Support\Carbon;
 
-class UserPresenter extends BasePresenter
+class UserPresenter
 {
-    public function avatar() : string
+    public object $data;
+
+    public function __construct(object $data)
     {
-        return str_replace('_normal', '', $this->profile_image_url_https);
+        $this->data = $data;
+    }
+
+    public function avatar(bool $full = false) : string
+    {
+        return $full
+            ? str_replace('_normal', '', $this->data->profile_image_url_https)
+            : $this->data->profile_image_url_https;
     }
 
     public function date() : string
     {
-        return Carbon::parse($this->created_at)->isoFormat('LL');
+        return Carbon::parse($this->data->created_at)->isoFormat('LL');
     }
 
     public function description() : string
@@ -24,15 +33,26 @@ class UserPresenter extends BasePresenter
     public function websiteDisplayUrl() : ?string
     {
         return optional(
-            optional($this->entities->url->urls)[0]
+            optional($this->data->entities->url->urls)[0]
         )->display_url;
     }
 
     public function websiteUrl() : ?string
     {
         return optional(
-            optional($this->entities->url->urls)[0]
+            optional($this->data->entities->url->urls)[0]
         )->url;
+    }
+
+    protected function render(string $key) : string
+    {
+        $text = $this->data->{$key};
+
+        foreach ($this->data->entities->$key->urls as $url) {
+            $text = mb_ereg_replace($url->url, '<a href="' . $url->url . '" target="_blank" rel="noopener" class="font-semibold hover:text-yellow-500">' . $url->display_url . '</a>', $text);
+        }
+
+        return $text;
     }
 
     public function __call($name, $arguments)
@@ -41,18 +61,7 @@ class UserPresenter extends BasePresenter
             $property = str_replace('Count', '', $name);
             $property = $property . '_count';
 
-            return number_format($this->$property);
+            return number_format($this->data->$property);
         }
-    }
-
-    protected function render(string $key) : string
-    {
-        $text = $this->{$key};
-
-        foreach ($this->entities->$key->urls as $url) {
-            $text = mb_ereg_replace($url->url, '<a href="' . $url->url . '" target="_blank" rel="noopener" class="font-semibold hover:text-yellow-500">' . $url->display_url . '</a>', $text);
-        }
-
-        return $text;
     }
 }

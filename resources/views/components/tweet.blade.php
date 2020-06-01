@@ -4,8 +4,8 @@
             <img src="{{ $tweet->userAvatar() }}" width="48" height="48" class="flex-none rounded-full">
 
             <div class="leading-tight pl-4">
-                <p class="font-bold">{{ $tweet->user->name }}</p>
-                <p>&#x40;{{ $tweet->user->screen_name }}</p>
+                <p class="font-bold">{{ $tweet->data->user->name }}</p>
+                <p>&#x40;{{ $tweet->data->user->screen_name }}</p>
             </div>
         </a>
 

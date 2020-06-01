@@ -10,7 +10,7 @@
             <ul class="mt-4">
                 @foreach ($diff->additions() as $addition)
                     <li>
-                        <x-user :user="$addition">
+                        <x-user :user="new App\Presenters\UserPresenter((object) $addition)">
                             <x-slot name="icon">
                                 <x:zondicon-add-solid class="fill-current h-4 mr-4 text-green-500 w-4" />
                             </x-slot>
@@ -30,7 +30,7 @@
             <ul class="mt-4">
                 @foreach ($diff->deletions() as $deletion)
                     <li>
-                        <x-user :user="$deletion">
+                        <x-user :user="new App\Presenters\UserPresenter((object) $deletion)">
                             <x-slot name="icon">
                                 <x:zondicon-minus-solid class="fill-current h-4 mr-4 text-red-500 w-4" />
                             </x-slot>
