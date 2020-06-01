@@ -5,7 +5,7 @@
         </div>
 
         <div class="sm:ml-6 mt-6 sm:mt-0">
-            <h1 class="font-semibold leading-none mb-4 text-3xl text-center md:text-left">{{ $user->data->name }}</h1>
+            <h1 class="font-semibold leading-none mb-4 text-3xl text-center md:text-left">{{ $user->name }}</h1>
 
             @if ($description = $user->presenter->description())
                 <p class="italic my-4">{!! $description !!}</p>
