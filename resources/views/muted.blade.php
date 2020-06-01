@@ -4,9 +4,9 @@
     <div class="bg-gray-700 mt-8 py-4 rounded">
         @if ($mutedUsers->isNotEmpty())
             <ul>
-                @foreach ($mutedUsers as $mutedUser)
+                @foreach ($mutedUsers as $user)
                     <li>
-                        <x-user :user="$mutedUser" />
+                        <x-user :user="new App\Presenters\UserPresenter((object) $user)" />
                     </li>
                 @endforeach
             </ul>
