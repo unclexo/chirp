@@ -86,7 +86,7 @@
         </p>
 
         <p class="mb-4 px-2 text-center w-1/2 sm:w-1/3">
-            <a href="@route('muted')" class="bg-gray-600 bg-opacity-30 hover:bg-opacity-50 block p-4 rounded truncate">
+            <a href="@route('blocked')" class="bg-gray-600 bg-opacity-30 hover:bg-opacity-50 block p-4 rounded truncate">
                 <span class="block font-semibold text-2xl sm:text-3xl">{{ $user->blocked->count() }}</span>
                 <span>@choice('blocked user|blocked users', $user->blocked->count())</span>
             </a>
