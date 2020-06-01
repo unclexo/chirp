@@ -39,8 +39,8 @@
         <meta name="msapplication-TileColor" content="#da532c">
     </head>
     <body class="bg-gray-900 text-gray-400">
-        <p class="container py-4 text-center">
-            <a href="https://github.com/sponsors/benjamincrozat" target="_blank">
+        <p class="container">
+            <a href="https://github.com/sponsors/benjamincrozat" target="_blank" class="block py-4 text-center">
                 <span class="block container">Sponsor @config('app.name')'s developer on GitHub and <strong>get access to the source code</strong> to see how this serverless app works! →</span>
             </a>
         </p>
