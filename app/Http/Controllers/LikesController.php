@@ -16,7 +16,7 @@ class LikesController extends Controller
     {
         $query = $request->q
             ? $request->user()->favorites()->matching($request->q)
-            : $request->user()->favorites()->latest();
+            : $request->user()->favorites()->orderBy('id', 'desc');
 
         return view('likes')
             ->withLikes($query->paginate(30))
