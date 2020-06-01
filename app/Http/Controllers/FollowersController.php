@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Diff;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class FollowersController extends Controller
 {
@@ -17,20 +17,6 @@ class FollowersController extends Controller
     {
         return view('followers')
             ->withUser($user = $request->user())
-            ->withDiffs(
-                DB::table('diffs')
-                    ->selectRaw('
-                        DATE(created_at) AS date,
-                        user_id,
-                        JSON_ARRAYAGG(additions) AS additions,
-                        JSON_ARRAYAGG(deletions) AS deletions
-                    ')
-                    ->where('user_id', $user->id)
-                    ->where('for', 'followers')
-                    ->groupBy('date')
-                    ->groupBy('user_id')
-                    ->orderBy('date', 'DESC')
-                    ->get()
-            );
+            ->withDiffs(Diff::diffsHistory($user->id, 'followers'));
     }
 }
