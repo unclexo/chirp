@@ -24,10 +24,10 @@
         <meta name="description" content="Chirp is a 100% free web application to manage your Twitter account.">
         <meta property="og:title" content="Chirp — A free Twitter activity tracker">
         <meta property="og:description" content="Chirp is a 100% free tool to manage your Twitter account. Track unfollowers, instant search through tweets you liked, etc.">
-        <meta property="og:image" content="">
+        <meta property="og:image" content="@secureAsset('img/banner.jpg')">
         <meta name="twitter:title" content="Chirp">
         <meta name="twitter:description" content="Chirp is a 100% free tool to manage your Twitter account. Track unfollowers, instant search through tweets you liked, etc.">
-        <meta name="twitter:image" content="">
+        <meta name="twitter:image" content="@secureAsset('img/banner.jpg')">
         <meta name="theme-color" content="#ffffff">
 
         <link rel="stylesheet" href="@mix('/css/app.css')">
