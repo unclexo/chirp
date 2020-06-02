@@ -18,9 +18,9 @@ class Favorite extends Model
         'data' => 'object',
     ];
 
-    public function scopeMatching(Builder $queryBuilder, string $query) : Builder
+    public function scopeMatching(Builder $queryBuilder, string $query, ?string $sortBy = null) : Builder
     {
-        return $queryBuilder
+        $queryBuilder
             ->selectRaw(
                 '*, MATCH(author_name, author_screen_name, full_text) AGAINST (? IN BOOLEAN MODE) AS score',
                 [$query]
@@ -28,8 +28,13 @@ class Favorite extends Model
             ->whereRaw(
                 'MATCH(author_name, author_screen_name, full_text) AGAINST(? IN BOOLEAN MODE)',
                 [$query]
-            )
-            ->orderBy('score', 'DESC');
+            );
+
+        if ('id' === $sortBy) {
+            return $queryBuilder->orderBy('id', 'DESC');
+        } else {
+            return $queryBuilder->orderBy('score', 'DESC');
+        }
     }
 
     public function user() : BelongsTo
