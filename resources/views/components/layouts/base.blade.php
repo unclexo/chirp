@@ -49,7 +49,7 @@
 
         <footer class="container pb-32 pt-8 md:py-8">
             <p class="text-center">
-                Made with <x:zondicon-heart class="fill-current h-3 inline" /> by <a href="https://twitter.com/benjamincrozat" target="_blank" class="link hover:text-yellow-500">Benjamin Crozat</a>.
+                Made with <x:zondicon-heart class="fill-current h-3 inline" /> by <a href="https://twitter.com/benjamincrozat" target="_blank" class="font-semibold hover:text-yellow-500">Benjamin Crozat</a>.
             </p>
 
             <ul class="flex items-center justify-center mt-4">
