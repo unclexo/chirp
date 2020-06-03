@@ -16,21 +16,21 @@ class FetchBlockedUsersTest extends TestCase
             ->shouldReceive('get')
             ->with('blocks/ids', ['cursor' => -1])
             ->andReturn(
-                $data = json_decode(file_get_contents(base_path('database/json/blocked-ids.json')))
+                $data = json_decode(file_get_contents(database_path('twitter/json/blocked-ids.json')))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(200)
             ->shouldReceive('get')
-            ->with('users/lookup', ['user_id' => implode(',', (array) $data->ids)])
+            ->with('users/lookup', ['user_id' => implode(',', $data->ids)])
             ->andReturn(
-                json_decode(file_get_contents(base_path('database/json/users-lookup.json')))
+                json_decode(file_get_contents(database_path('twitter/json/users-lookup.json')))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(200)
             ->shouldReceive('get')
-            ->with('friendships/lookup', ['user_id' => implode(',', (array) $data->ids)])
+            ->with('friendships/lookup', ['user_id' => implode(',', $data->ids)])
             ->andReturn(
-                json_decode(file_get_contents(base_path('database/json/friendships-lookup.json')))
+                json_decode(file_get_contents(database_path('twitter/json/friendships-lookup.json')))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(200);

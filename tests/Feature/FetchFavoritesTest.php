@@ -13,7 +13,7 @@ class FetchFavoritesTest extends TestCase
     /** @test */
     public function it_fetches_blocked_users() : void
     {
-        $data = json_decode(file_get_contents(base_path('database/json/favorites-list.json')));
+        $data = json_decode(file_get_contents(database_path('twitter/json/favorites-list.json')));
 
         Twitter::shouldReceive('setOauthToken')
             // First run of the loop.

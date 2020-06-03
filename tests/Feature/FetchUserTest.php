@@ -16,14 +16,14 @@ class FetchUserTest extends TestCase
             ->shouldReceive('get')
             ->with('account/verify_credentials')
             ->andReturn(
-                json_decode(file_get_contents(base_path('database/json/account-verify_credentials.json')))
+                json_decode(file_get_contents(database_path('twitter/json/account-verify_credentials.json')))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(200)
             ->shouldReceive('get')
             ->with('account/settings')
             ->andReturn(
-                json_decode(file_get_contents(base_path('database/json/account-settings.json')))
+                json_decode(file_get_contents(database_path('twitter/json/account-settings.json')))
             )
             ->shouldReceive('getLastHttpCode')
             ->andReturn(200);
