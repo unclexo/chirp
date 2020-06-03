@@ -1,4 +1,4 @@
-<x-layout>
+<x-layouts.full>
     <h2 class="font-semibold leading-none text-center text-xl">Likes</h2>
 
     <div class="mt-8">
@@ -38,4 +38,4 @@
             @endif
         @endif
     </div>
-</x-layout>
+</x-layouts.full>

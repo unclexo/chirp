@@ -1,4 +1,4 @@
-<x-layout>
+<x-layouts.full>
     <h3 class="font-semibold leading-none text-center text-xl">Settings</h3>
 
     <form method="POST" action="@route('user.delete')" class="bg-gray-700 bg-opacity-50 mt-8 px-4 py-8 lg:p-8 rounded shadow">
@@ -15,4 +15,4 @@
             <button type="submit" class="bg-red-500 hover:bg-red-400 font-semibold inline-block md:ml-8 lg:ml-16 mt-4 sm:mt-0 mx-auto px-4 py-2 rounded text-red-100 table sm:inline-block hover:text-yellow-500">Supprimer</button>
         </div>
     </form>
-</x-layout>
+</x-layouts.full>

@@ -1,4 +1,4 @@
-<x-layout>
+<x-layouts.full>
     <div class="mt-16 md:mt-0 sm:flex sm:items-center">
         <div class="flex-none text-center md:text-left">
             <img src="{{ $user->presenter->avatar(true) }}" class="h-24 md:h-32 inline rounded-full">
@@ -87,4 +87,4 @@
             </a>
         </p>
     </div>
-</x-layout>
+</x-layouts.full>

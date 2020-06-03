@@ -1,4 +1,4 @@
-<x-layout>
+<x-layouts.full>
     <h2 class="font-semibold leading-none text-center text-xl">Followers history</h2>
 
     @forelse ($diffs as $diff)
@@ -14,4 +14,4 @@
             Nothing to show yet, please let me gather data and come back later!
         </p>
     @endforelse
-</x-layout>
+</x-layouts.full>
