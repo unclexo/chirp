@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Jobs;
+namespace Tests\Feature;
 
 use App\User;
 use Tests\TestCase;
