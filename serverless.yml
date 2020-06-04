@@ -53,7 +53,7 @@ package:
     exclude:
         - '**/.DS_Store'
         - .github/**
-        - app/Jobs/**/*.json
+        - database/twitter/**
         - node_modules/**
         - public/css/**
         - public/img/**
@@ -80,10 +80,3 @@ resources:
             Properties:
                 RedrivePolicy:
                     maxReceiveCount: 3 # Jobs will be retried up to 3 times.
-                    # Failed jobs (after the retries) will be moved to another queue for storage.
-                    deadLetterTargetArn:
-                        Fn::GetAtt: [ DeadLetterQueue, Arn ]
-        DeadLetterQueue:
-            Type: AWS::SQS::Queue
-            Properties:
-                MessageRetentionPeriod: 1209600 # 14 days.
