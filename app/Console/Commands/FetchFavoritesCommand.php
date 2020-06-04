@@ -14,8 +14,6 @@ class FetchFavoritesCommand extends Command
 
     public function handle() : void
     {
-        // Let's use a Lazy Collection to stay memory efficient.
-        // https://laravel.com/docs/collections#lazy-collections
         User::cursor()->each(function (User $user) {
             FetchFavorites::dispatch($user);
         });

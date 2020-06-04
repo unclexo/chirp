@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Illuminate\Auth\Events\Registered;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
@@ -26,21 +27,22 @@ class SocialiteController extends Controller
     {
         $abstractUser = Socialite::driver('twitter')->user();
 
-        $user = User::firstOrCreate(
-            ['id' => $abstractUser->id],
-            [
-                'id'           => $abstractUser->id,
-                'name'         => $abstractUser->name,
-                'nickname'     => $abstractUser->nickname,
-                'token'        => $abstractUser->token,
-                'token_secret' => $abstractUser->tokenSecret,
-                'data'         => $abstractUser->user,
-                'followers'    => [],
-                'friends'      => [],
-                'muted'        => [],
-                'blocked'      => [],
-            ]
-        );
+        $user = User::firstOrCreate(['id' => $abstractUser->id], [
+            'id'           => $abstractUser->id,
+            'name'         => $abstractUser->name,
+            'nickname'     => $abstractUser->nickname,
+            'token'        => $abstractUser->token,
+            'token_secret' => $abstractUser->tokenSecret,
+            'data'         => $abstractUser->user,
+            'followers'    => [],
+            'friends'      => [],
+            'muted'        => [],
+            'blocked'      => [],
+        ]);
+
+        if ($user->wasRecentlyCreated) {
+            event(Registered::class);
+        }
 
         Auth::login($user, true);
 

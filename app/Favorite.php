@@ -20,6 +20,8 @@ class Favorite extends Model
 
     public function scopeMatching(Builder $queryBuilder, string $query, ?string $sortBy = null) : Builder
     {
+        // Yes, two uses of MATCH() and the query still takes just 1ms to run.
+
         $queryBuilder
             ->selectRaw(
                 '*, MATCH(author_name, author_screen_name, full_text) AGAINST (? IN BOOLEAN MODE) AS score',
