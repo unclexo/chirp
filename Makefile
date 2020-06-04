@@ -1,4 +1,8 @@
-install:
+deploy:
+	@echo "Running tests before deploying…"
+
+	php vendor/bin/phpunit
+
 	@echo "Installing and compiling dependencies for production…"
 
 	composer install -n --no-dev --no-suggest
@@ -12,10 +16,9 @@ install:
 
 	yarn && yarn prod
 
-deploy:
 	@echo "Deploying on AWS…"
 
-	aws s3 sync public s3://<bucket> \
+	aws s3 sync public s3://chirp.benjamincrozat.com \
 	    --acl public-read \
 	    --exclude "*.DS_Store" \
 	    --exclude "*.gitignore" \
@@ -26,14 +29,13 @@ deploy:
 	    --no-follow-symlinks
 
 	aws cloudfront create-invalidation \
-	    --distribution-id <distribution-id> \
+	    --distribution-id E35GTCXG8QLGI4 \
 	    --paths /\*
 
 	serverless deploy --stage prod
 
 	vendor/bin/bref cli chirp-prod-artisan --region=eu-west-3 -- migrate --force
 
-clean:
 	@echo "Cleaning up…"
 
 	yes | cp -rf .env .env.production

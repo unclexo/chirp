@@ -5,7 +5,6 @@
 /.phpunit.result.cache
 /.serverless
 /auth.json
-/Makefile
 /node_modules
 /phpunit.xml
 /public/css
