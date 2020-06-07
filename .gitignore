@@ -4,7 +4,6 @@
 /.php_cs.cache
 /.phpunit.result.cache
 /.serverless
-/auth.json
 /node_modules
 /phpunit.xml
 /public/css
