@@ -2,20 +2,21 @@
 
 namespace App\Jobs;
 
+use App\Facades\Twitter;
 use App\Jobs\Traits\CallsTwitter;
 
 class FetchUser extends BaseJob
 {
     use CallsTwitter;
 
-    public function handle() : void
+    public function fire() : void
     {
-        $data = $this->checkForTwitterErrors(
-            $this->twitter()->get('account/verify_credentials')
+        $data = $this->guardAgainstTwitterErrors(
+            Twitter::get('account/verify_credentials')
         );
 
-        $data->settings = $this->checkForTwitterErrors(
-            $this->twitter()->get('account/settings')
+        $data->settings = $this->guardAgainstTwitterErrors(
+            Twitter::get('account/settings')
         );
 
         $this->user->update([

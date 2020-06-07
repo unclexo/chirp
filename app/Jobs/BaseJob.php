@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\User;
+use App\Facades\Twitter;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -15,10 +16,22 @@ abstract class BaseJob implements ShouldQueue
 
     public User $user;
 
-    public $deleteWhenMissingModels = true;
+    public bool $deleteWhenMissingModels = true;
 
     public function __construct(User $user)
     {
         $this->user = $user;
     }
+
+    public function handle() : void
+    {
+        Twitter::setOauthToken(
+            $this->user->token,
+            $this->user->token_secret
+        );
+
+        $this->fire();
+    }
+
+    abstract public function fire() : void;
 }

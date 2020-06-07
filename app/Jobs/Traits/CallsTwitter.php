@@ -27,7 +27,7 @@ trait CallsTwitter
     public function getIdsFor(string $endpoint) : array
     {
         do {
-            $response = $this->checkForTwitterErrors(
+            $response = $this->guardAgainstTwitterErrors(
                 $this->twitter()->get("$endpoint/ids", [
                     'cursor' => $response->next_cursor ?? -1,
                 ])
@@ -64,7 +64,7 @@ trait CallsTwitter
     public function getUsersFromIds(array $chunks) : array
     {
         return Arr::collapse(array_map(function (array $ids) {
-            $users = $this->checkForTwitterErrors(
+            $users = $this->guardAgainstTwitterErrors(
                 $this->twitter()->get('users/lookup', [
                     'user_id' => implode(',', $ids),
                 ])
@@ -77,7 +77,7 @@ trait CallsTwitter
     public function getConnectionsToUserFromIds(array $chunks) : array
     {
         return Arr::collapse(array_map(function (array $ids) {
-            $friendships = $this->checkForTwitterErrors(
+            $friendships = $this->guardAgainstTwitterErrors(
                 $this->twitter()->get('friendships/lookup', [
                     'user_id' => implode(',', $ids),
                 ])
@@ -90,9 +90,9 @@ trait CallsTwitter
     /**
      * @throws Exception
      */
-    protected function checkForTwitterErrors($response)
+    protected function guardAgainstTwitterErrors($response)
     {
-        if (200 === $this->twitter()->getLastHttpCode()) {
+        if (200 === Twitter::getLastHttpCode()) {
             return $response;
         }
 

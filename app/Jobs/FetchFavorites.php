@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\User;
 use App\Favorite;
+use App\Facades\Twitter;
 use Illuminate\Support\Arr;
 use App\Jobs\Traits\CallsTwitter;
 use Illuminate\Support\Collection;
@@ -22,7 +23,7 @@ class FetchFavorites extends BaseJob
         $this->favorites = new Collection;
     }
 
-    public function handle() : void
+    public function fire() : void
     {
         $this
             ->fetchFavorites()
@@ -39,8 +40,8 @@ class FetchFavorites extends BaseJob
                 $parameters['max_id'] = Arr::last($response)->id;
             }
 
-            $response = $this->checkForTwitterErrors(
-                $this->twitter()->get('favorites/list', $parameters)
+            $response = $this->guardAgainstTwitterErrors(
+                Twitter::get('favorites/list', $parameters)
             );
 
             if (($parameters['max_id'] ?? 0) === Arr::last($response)->id) {

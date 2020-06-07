@@ -34,7 +34,7 @@ class CallsTwitterTest extends TestCase
             ->andReturn(403);
 
         try {
-            $this->checkForTwitterErrors(
+            $this->guardAgainstTwitterErrors(
                 Twitter::get('foo/bar')
             );
         } catch (Exception $e) {

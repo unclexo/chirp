@@ -8,7 +8,7 @@ class FetchFollowers extends BaseJob
 {
     use MakesDiffs;
 
-    public function handle() : void
+    public function fire() : void
     {
         $this->makeDiffFor('followers');
     }

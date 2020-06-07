@@ -2,17 +2,18 @@
 
 namespace App\Jobs;
 
+use App\Facades\Twitter;
 use App\Jobs\Traits\CallsTwitter;
 
 class FetchBlockedUsers extends BaseJob
 {
     use CallsTwitter;
 
-    public function handle() : void
+    public function fire() : void
     {
         do {
-            $response = $this->checkForTwitterErrors(
-                $this->twitter()->get('blocks/ids', [
+            $response = $this->guardAgainstTwitterErrors(
+                Twitter::get('blocks/ids', [
                     'cursor' => $response->next_cursor ?? -1,
                 ])
             );
