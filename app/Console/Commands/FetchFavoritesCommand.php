@@ -14,7 +14,7 @@ class FetchFavoritesCommand extends Command
 
     public function handle() : void
     {
-        User::whereDisabled(false)->cursor()->each(function (User $user) {
+        User::cursor()->each(function (User $user) {
             FetchFavorites::dispatch($user);
         });
     }
