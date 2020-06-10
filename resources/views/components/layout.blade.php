@@ -40,7 +40,7 @@
     </head>
     <body class="bg-gray-900 text-gray-400">
         <p class="container">
-            <a href="https://github.com/sponsors/benjamincrozat" target="_blank" class="block py-4 text-center">
+            <a href="https://github.com/sponsors/benjamincrozat" class="block py-4 text-center">
                 <span class="block container">Sponsor @config('app.name')'s developer on GitHub and <strong>get access to the source code</strong> to see how this serverless app works! →</span>
             </a>
         </p>
@@ -77,7 +77,7 @@
 
         <footer class="container pb-32 pt-8 md:py-8">
             <p class="text-center">
-                Made with <x:zondicon-heart class="fill-current h-3 inline" /> by <a href="https://twitter.com/benjamincrozat" target="_blank" class="link hover:text-yellow-500">Benjamin Crozat</a>.
+                Made with <x:zondicon-heart class="fill-current h-3 inline" /> by <a href="https://twitter.com/benjamincrozat" class="link hover:text-yellow-500">Benjamin Crozat</a>.
             </p>
 
             <ul class="flex items-center justify-center mt-4">
@@ -131,7 +131,7 @@
             </ul>
         </footer>
 
-        <script src="@mix('/js/app.js')"></script>
+        <script src="@mix('/js/app.js')" async></script>
 
         @stack('body_code')
 
