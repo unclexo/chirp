@@ -1,7 +1,7 @@
 deploy:
 	@echo "Running tests before deploying…"
 
-	php vendor/bin/phpunit
+	php artisan dusk
 
 	@echo "Installing and compiling dependencies for production…"
 

@@ -8,7 +8,12 @@
                 <h2 class="mt-2 md:text-xl text-yellow-500">A free Twitter activity tracker</h2>
             </div>
 
-            <a href="@route('login')" class="block font-semibold mt-16 text-blue-500 hover:text-blue-400 md:text-xl">Sign&nbsp;in&nbsp;with&nbsp;Twitter</a>
+            <a
+                href="@route('login')"
+                class="block font-semibold mt-16 text-blue-500 hover:text-blue-400 md:text-xl"
+            >
+                Sign in with Twitter
+            </a>
         </div>
     </div>
 </x-layouts.base>

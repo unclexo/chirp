@@ -34,14 +34,10 @@ class SocialiteController extends Controller
             'token'        => $abstractUser->token,
             'token_secret' => $abstractUser->tokenSecret,
             'data'         => $abstractUser->user,
-            'followers'    => [],
-            'friends'      => [],
-            'muted'        => [],
-            'blocked'      => [],
         ]);
 
         if ($user->wasRecentlyCreated) {
-            event(Registered::class);
+            event(new Registered($user));
         }
 
         Auth::login($user, true);
