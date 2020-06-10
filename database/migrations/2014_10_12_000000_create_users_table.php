@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
             $table->string('token');
             $table->string('token_secret');
             $table->json('data');
+            $table->boolean('disabled')->default(false);
             $table->json('followers');
             $table->json('friends');
             $table->json('muted');

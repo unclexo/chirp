@@ -14,7 +14,7 @@ class FetchFollowersCommand extends Command
 
     public function handle() : void
     {
-        User::cursor()->each(function (User $user) {
+        User::whereDisabled(false)->cursor()->each(function (User $user) {
             FetchFollowers::dispatch($user);
         });
     }

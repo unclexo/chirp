@@ -19,15 +19,20 @@ class Kernel extends ConsoleKernel
         // SQS doesn't support delayed jobs. We have to use the scheduler.
 
         $schedule->call(function () {
-            User::cursor()->each(function (User $user) {
+            User::whereDisabled(false)->cursor()->each(function (User $user) {
                 FetchBlockedUsers::dispatch($user);
                 FetchFollowers::dispatch($user);
                 FetchFriends::dispatch($user);
                 FetchMutedUsers::dispatch($user);
                 FetchUser::dispatch($user);
+            });
+        })->everyFiveMinutes();
+
+        $schedule->call(function () {
+            User::whereDisabled(false)->cursor()->each(function (User $user) {
                 FetchFavorites::dispatch($user);
             });
-        })->hourly();
+        })->everyTenMinutes();
     }
 
     protected function commands() : void
