@@ -14,19 +14,11 @@ class CreateUsersTable extends Migration
             $table->string('nickname');
             $table->string('token');
             $table->string('token_secret');
-<<<<<<< Updated upstream
-            $table->json('data');
-            $table->json('followers');
-            $table->json('friends');
-            $table->json('muted');
-            $table->json('blocked');
-=======
             $table->json('data')->nullable();
             $table->json('followers')->nullable();
             $table->json('friends')->nullable();
             $table->json('muted')->nullable();
             $table->json('blocked')->nullable();
->>>>>>> Stashed changes
             $table->rememberToken();
             $table->timestamps();
         });
