@@ -17,9 +17,9 @@ class BlockedController extends Controller
     {
         $perPage     = 50;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $user        = $request->user();
 
         return view('blocked')
-            ->withUser($user = $request->user())
             ->withBlockedUsers(
                 new LengthAwarePaginator(
                     $user->blocked->chunk($perPage)[$currentPage - 1] ?? [],

@@ -14,8 +14,6 @@ class OverviewController extends Controller
 
     public function __invoke(Request $request) : View
     {
-        return view('overview')->withUser(
-            $request->user()
-        );
+        return view('overview');
     }
 }

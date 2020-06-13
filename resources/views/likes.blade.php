@@ -1,5 +1,11 @@
 <x-layouts.full>
-    <h2 class="font-semibold leading-none text-center text-xl">Likes</h2>
+    <h2 class="font-semibold leading-none text-center text-xl">
+        @choice(
+            ':formatted like|:formatted likes',
+            $user->data->favourites_count,
+            ['formatted' => $user->presenter->favouritesCount()]
+        )
+    </h2>
 
     <div class="mt-8">
         <form method="GET" action="@route('likes.search')" class="bg-gray-900 flex items-center justify-center rounded-full">

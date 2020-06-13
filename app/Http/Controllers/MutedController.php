@@ -17,9 +17,9 @@ class MutedController extends Controller
     {
         $perPage     = 50;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $user        = $request->user();
 
         return view('muted')
-            ->withUser($user = $request->user())
             ->withMutedUsers(
                 new LengthAwarePaginator(
                     $user->muted->chunk($perPage)[$currentPage - 1] ?? [],

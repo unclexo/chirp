@@ -15,8 +15,6 @@ class FollowersController extends Controller
 
     public function __invoke(Request $request) : View
     {
-        return view('followers')
-            ->withUser($user = $request->user())
-            ->withDiffs(Diff::diffsHistory($user->id, 'followers'));
+        return view('followers')->withDiffs(Diff::diffsHistory($user->id, 'followers'));
     }
 }

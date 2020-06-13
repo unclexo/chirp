@@ -12,8 +12,6 @@ class User extends Authenticatable
 {
     use Unguarded;
 
-    public $incrementing = false;
-
     protected $casts = [
         'data'      => 'object',
         'followers' => 'collection',
@@ -21,6 +19,8 @@ class User extends Authenticatable
         'muted'     => 'collection',
         'blocked'   => 'collection',
     ];
+
+    public $incrementing = false;
 
     public function diffs() : HasMany
     {

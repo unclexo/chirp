@@ -1,7 +1,7 @@
 deploy:
 	@echo "Running tests before deploying…"
 
-	php artisan dusk
+	composer test
 
 	@echo "Installing and compiling dependencies for production…"
 
