@@ -28,6 +28,7 @@ class BlockedController extends Controller
                     $currentPage,
                     ['path' => LengthAwarePaginator::resolveCurrentPath()]
                 )
-            );
+            )
+            ->withCount($user->blocked->count());
     }
 }

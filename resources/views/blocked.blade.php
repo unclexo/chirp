@@ -1,5 +1,7 @@
 <x-layouts.full>
-    <h2 class="font-semibold leading-none text-center text-xl">Blocked accounts</h2>
+    <h2 class="font-semibold leading-none text-center text-xl">
+        @choice(':count blocked user|:count blocked users', $count)
+    </h2>
 
     <div class="bg-gray-700 mt-8 py-4 rounded">
         @if ($blockedUsers->isNotEmpty())

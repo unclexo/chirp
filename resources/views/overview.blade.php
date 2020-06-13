@@ -41,49 +41,49 @@
         <div class="mb-4 px-2 text-center w-1/2 sm:w-1/3">
             <p class="bg-gray-600 bg-opacity-30 p-4 rounded truncate">
                 <span class="block font-semibold text-2xl sm:text-3xl">{{ $user->presenter->statusesCount() }}</span>
-                <span>@choice('tweet|tweets', $user->presenter->statusesCount())</span>
+                @choice('tweet|tweets', $user->presenter->statusesCount())
             </p>
         </div>
 
         <p class="mb-4 px-2 text-center w-1/2 sm:w-1/3">
             <a href="@route('followers')" class="bg-gray-600 bg-opacity-30 hover:bg-opacity-50 block p-4 rounded truncate">
                 <span class="block font-semibold text-2xl sm:text-3xl">{{ $user->presenter->followersCount() }}</span>
-                <span>@choice('follower|followers', $user->data->followers_count)</span>
+                @choice('follower|followers', $user->data->followers_count)
             </a>
         </p>
 
         <p class="mb-4 px-2 text-center w-1/2 sm:w-1/3">
             <a href="@route('followings')" class="bg-gray-600 bg-opacity-30 hover:bg-opacity-50 block p-4 rounded truncate">
                 <span class="block font-semibold text-2xl sm:text-3xl">{{ $user->presenter->friendsCount() }}</span>
-                <span>@choice('following|followings', $user->data->friends_count)</span>
+                @choice('following|followings', $user->data->friends_count)
             </a>
         </p>
 
         <div class="mb-4 px-2 text-center w-1/2 sm:w-1/3">
             <a href="@route('likes.index')" class="bg-gray-600 bg-opacity-30 hover:bg-opacity-50 block p-4 rounded truncate">
                 <span class="block font-semibold text-2xl sm:text-3xl">{{ $user->presenter->favouritesCount() }}</span>
-                <span>@choice('like|likes', $user->data->favourites_count)</span>
+                @choice('like|likes', $user->data->favourites_count)
             </a>
         </div>
 
         <div class="mb-4 px-2 text-center w-1/2 sm:w-1/3">
             <p class="bg-gray-600 bg-opacity-30 p-4 rounded truncate">
                 <span class="block font-semibold text-2xl sm:text-3xl">{{ $user->presenter->listedCount() }}</span>
-                <span>listed</span>
+                listed
             </p>
         </div>
 
         <p class="mb-4 px-2 text-center w-1/2 sm:w-1/3">
             <a href="@route('muted')" class="bg-gray-600 bg-opacity-30 hover:bg-opacity-50 block p-4 rounded truncate">
                 <span class="block font-semibold text-2xl sm:text-3xl">{{ $user->muted->count() }}</span>
-                <span>@choice('muted user|muted users', $user->muted->count())</span>
+                @choice('muted user|muted users', $user->muted->count())
             </a>
         </p>
 
         <p class="mb-4 px-2 text-center w-1/2 sm:w-1/3">
             <a href="@route('blocked')" class="bg-gray-600 bg-opacity-30 hover:bg-opacity-50 block p-4 rounded truncate">
                 <span class="block font-semibold text-2xl sm:text-3xl">{{ $user->blocked->count() }}</span>
-                <span>@choice('blocked user|blocked users', $user->blocked->count())</span>
+                @choice('blocked user|blocked users', $user->blocked->count())
             </a>
         </p>
     </div>

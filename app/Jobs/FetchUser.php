@@ -19,10 +19,11 @@ class FetchUser extends BaseJob
             Twitter::get('account/settings')
         );
 
-        $this->user->update([
+        $this->user->fill([
             'id'       => $data->id,
             'name'     => $data->name,
             'nickname' => $data->screen_name,
-        ] + compact('data'));
+            'data'     => $data,
+        ])->save();
     }
 }

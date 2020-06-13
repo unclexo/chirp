@@ -10,11 +10,17 @@ class OverviewControllerTest extends TestCase
     use CreatesUser;
 
     /** @test */
-    public function it_does_something() : void
+    public function it_works() : void
     {
         $this
-            ->actingAs($this->createUser())
+            ->actingAs($user = $this->createUser())
             ->getJson(route('overview'))
-            ->assertOk();
+            ->assertOk()
+            ->assertView()
+            ->contains($user->name)
+            ->contains($user->data->description)
+            ->contains($user->data->location)
+            ->contains($user->presenter->date())
+        ;
     }
 }
