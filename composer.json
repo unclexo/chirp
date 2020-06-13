@@ -1,6 +1,6 @@
 {
     "require": {
-        "php": "^7.2.5",
+        "php": "^7.4",
         "abraham/twitteroauth": "^1.1",
         "bref/bref": "^0.5.24",
         "bref/laravel-bridge": "^0.1.0",
@@ -17,6 +17,7 @@
         "sentry/sentry-laravel": "^1.7"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.7",
         "beyondcode/laravel-dump-server": "^1.4",
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
@@ -56,6 +57,10 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "test": [
+            "@php vendor/bin/phpunit",
+            "@php artisan dusk"
         ]
     },
     "minimum-stability": "dev",

@@ -18,25 +18,12 @@ class Favorite extends Model
         'data' => 'object',
     ];
 
-    public function scopeMatching(Builder $queryBuilder, string $query, ?string $sortBy = null) : Builder
+    public function scopeMatching(Builder $query, string $terms, ?string $sort_by) : Builder
     {
-        // Yes, two uses of MATCH() and the query still takes just 1ms to run.
-
-        $queryBuilder
-            ->selectRaw(
-                '*, MATCH(author_name, author_screen_name, full_text) AGAINST (? IN BOOLEAN MODE) AS score',
-                [$query]
-            )
-            ->whereRaw(
-                'MATCH(author_name, author_screen_name, full_text) AGAINST(? IN BOOLEAN MODE)',
-                [$query]
-            );
-
-        if ('id' === $sortBy) {
-            return $queryBuilder->orderBy('id', 'DESC');
-        } else {
-            return $queryBuilder->orderBy('score', 'DESC');
-        }
+        return $query
+            ->selectRaw('*, MATCH(author_name, author_screen_name, full_text) AGAINST (? IN BOOLEAN MODE) AS score', [$terms])
+            ->whereRaw('MATCH(author_name, author_screen_name, full_text) AGAINST(? IN BOOLEAN MODE)', [$terms])
+            ->orderBy('date' === $sort_by ? 'id' : 'score', 'DESC');
     }
 
     public function user() : BelongsTo

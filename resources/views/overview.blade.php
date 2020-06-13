@@ -60,7 +60,7 @@
         </p>
 
         <div class="mb-4 px-2 text-center w-1/2 sm:w-1/3">
-            <a href="@route('likes')" class="bg-gray-600 bg-opacity-30 hover:bg-opacity-50 block p-4 rounded truncate">
+            <a href="@route('likes.index')" class="bg-gray-600 bg-opacity-30 hover:bg-opacity-50 block p-4 rounded truncate">
                 <span class="block font-semibold text-2xl sm:text-3xl">{{ $user->presenter->favouritesCount() }}</span>
                 <span>@choice('like|likes', $user->data->favourites_count)</span>
             </a>

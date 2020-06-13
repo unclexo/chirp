@@ -4,12 +4,7 @@ namespace Tests\Browser;
 
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
-use App\Jobs\FetchFriends;
-use App\Jobs\FetchFavorites;
-use App\Jobs\FetchFollowers;
-use App\Jobs\FetchMutedUsers;
-use App\Jobs\FetchBlockedUsers;
-use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Artisan;
 
 // This test's been written to ensure the "Sign in with Twitter" link works as intended.
 // We check for registration and jobs execution by hitting the real stuff, not mocks.
@@ -18,7 +13,7 @@ class SignInWithTwitterTest extends DuskTestCase
     /** @test */
     public function users_can_sign_in_with_twitter() : void
     {
-        Bus::fake();
+        Artisan::call('migrate:fresh');
 
         $this->browse(function (Browser $browser) {
             $browser
@@ -34,16 +29,8 @@ class SignInWithTwitterTest extends DuskTestCase
                 // Back to the app…
                 ->waitForRoute('overview')
             ;
-
-            $this->assertTrue(true);
         });
 
-        // An event has been emitted (Register) and the listener (FetchNewUserData) noticed. It
-        // then dispatched these jobs. We fake the bus because they don't need to really run.
-        Bus::assertDispatched(FetchBlockedUsers::class);
-        Bus::assertDispatched(FetchFollowers::class);
-        Bus::assertDispatched(FetchFriends::class);
-        Bus::assertDispatched(FetchFavorites::class);
-        Bus::assertDispatched(FetchMutedUsers::class);
+        $this->assertDatabaseHas('users', ['name' => 'Benjamin Crozat']);
     }
 }

@@ -1,9 +1,13 @@
 *.log
 /.env*
 !/.env.example
+/.idea
 /.php_cs.cache
+/.phpstorm.meta.php
 /.phpunit.result.cache
 /.serverless
+/_ide_helper.php
+/_ide_helper_models.php
 /node_modules
 /phpunit.xml
 /public/css
