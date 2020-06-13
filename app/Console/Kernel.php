@@ -25,14 +25,9 @@ class Kernel extends ConsoleKernel
                 FetchFriends::dispatch($user);
                 FetchMutedUsers::dispatch($user);
                 FetchUser::dispatch($user);
-            });
-        })->everyFiveMinutes();
-
-        $schedule->call(function () {
-            User::cursor()->each(function (User $user) {
                 FetchFavorites::dispatch($user);
             });
-        })->everyTenMinutes();
+        })->everyHour();
     }
 
     protected function commands() : void
