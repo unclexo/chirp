@@ -9013,7 +9013,7 @@ serverless-domain-manager@^4.1.0:
     aws-sdk "^2.490.0"
     chalk "^2.4.1"
 
-serverless@^1.71.3:
+serverless@^1.72.0:
   version "1.72.0"
   resolved "https://registry.yarnpkg.com/serverless/-/serverless-1.72.0.tgz#21b38f8307e3483c0307f38806839d3c9f1f3651"
   integrity sha512-+ylbI53V3axZsOVaN4CxHERQAwtJ03B5r3IZfTy1//ZnM8uLlhMPu1jXkKaQ+Drolk6+VtgZwx+zzjzyKSzt6Q==
