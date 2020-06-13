@@ -22,7 +22,7 @@ class SearchLikesController extends Controller
 
         return view('search')
             ->withLikes(
-                $request->user()->favorites()->matching($request->terms, $request->sort_by)->paginate(30)
+                $request->user()->likes()->matching($request->terms, $request->sort_by)->paginate(30)
             )
             ->withSortBy($request->sort_by)
             ->withTerms($request->terms);

@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use App\User;
 use App\Jobs\FetchUser;
+use App\Jobs\FetchLikes;
 use App\Jobs\FetchFriends;
-use App\Jobs\FetchFavorites;
 use App\Jobs\FetchFollowers;
 use App\Jobs\FetchMutedUsers;
 use App\Jobs\FetchBlockedUsers;
@@ -26,7 +26,7 @@ class FetchAllCommand extends Command
             FetchBlockedUsers::dispatch($user);
             FetchFollowers::dispatch($user);
             FetchFriends::dispatch($user);
-            FetchFavorites::dispatch($user);
+            FetchLikes::dispatch($user);
             FetchMutedUsers::dispatch($user);
             FetchUser::dispatch($user);
         });

@@ -2,8 +2,8 @@
 
 namespace App\Listeners;
 
+use App\Jobs\FetchLikes;
 use App\Jobs\FetchFriends;
-use App\Jobs\FetchFavorites;
 use App\Jobs\FetchFollowers;
 use App\Jobs\FetchMutedUsers;
 use App\Jobs\FetchBlockedUsers;
@@ -16,7 +16,7 @@ class FetchNewUserData
         FetchBlockedUsers::dispatch($event->user);
         FetchFollowers::dispatch($event->user);
         FetchFriends::dispatch($event->user);
-        FetchFavorites::dispatch($event->user);
+        FetchLikes::dispatch($event->user);
         FetchMutedUsers::dispatch($event->user);
     }
 }

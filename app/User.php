@@ -27,9 +27,9 @@ class User extends Authenticatable
         return $this->hasMany(Diff::class);
     }
 
-    public function favorites() : HasMany
+    public function likes() : HasMany
     {
-        return $this->hasMany(Favorite::class);
+        return $this->hasMany(Like::class);
     }
 
     public function getFollowersAttribute() : Collection

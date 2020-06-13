@@ -2,36 +2,36 @@
 
 namespace App\Jobs;
 
+use App\Like;
 use App\User;
-use App\Favorite;
 use App\Facades\Twitter;
 use Illuminate\Support\Arr;
 use App\Jobs\Traits\CallsTwitter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class FetchFavorites extends BaseJob
+class FetchLikes extends BaseJob
 {
     use CallsTwitter;
 
-    protected Collection $favorites;
+    protected Collection $likes;
 
     public function __construct(User $user)
     {
         parent::__construct($user);
 
-        $this->favorites = new Collection;
+        $this->likes = new Collection;
     }
 
     public function fire() : void
     {
         $this
-            ->fetchFavorites()
-            ->deleteUnecessaryFavorites()
-            ->insertNewFavorites();
+            ->fetchLikes()
+            ->deleteUnecessaryLikes()
+            ->insertNewLikes();
     }
 
-    protected function fetchFavorites() : self
+    protected function fetchLikes() : self
     {
         do {
             $parameters = ['count' => 200, 'tweet_mode' => 'extended'];
@@ -48,39 +48,39 @@ class FetchFavorites extends BaseJob
                 break;
             }
 
-            $this->favorites = ! empty($this->favorites)
-                ? $this->favorites->concat($response)
+            $this->likes = ! empty($this->likes)
+                ? $this->likes->concat($response)
                 : collect($response);
         } while (true);
 
         return $this;
     }
 
-    protected function deleteUnecessaryFavorites() : self
+    protected function deleteUnecessaryLikes() : self
     {
-        DB::table('favorites')
+        DB::table('likes')
             ->whereUserId($this->user->id)
-            ->whereNotIn('id', $this->favorites->pluck('id'))
+            ->whereNotIn('id', $this->likes->pluck('id'))
             ->delete();
 
         return $this;
     }
 
-    protected function insertNewFavorites() : self
+    protected function insertNewLikes() : self
     {
-        $existing = DB::table('favorites')
+        $existing = DB::table('likes')
             ->select('id')
             ->whereUserId($this->user->id)
             ->get()
             ->pluck('id');
 
-        $new = $this->favorites->whereNotIn('id', $existing);
+        $new = $this->likes->whereNotIn('id', $existing);
 
-        Favorite::insert($new->map(function (object $favorite) {
+        Like::insert($new->map(function (object $like) {
             return [
-                'id'      => $favorite->id,
+                'id'      => $like->id,
                 'user_id' => $this->user->id,
-                'data'    => json_encode($favorite),
+                'data'    => json_encode($like),
             ];
         })->toArray());
 

@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Jobs\FetchFavorites;
+use App\Jobs\FetchLikes;
 use Tests\Concerns\CreatesUser;
 
 class ListLikesControllerTest extends TestCase
@@ -15,7 +15,7 @@ class ListLikesControllerTest extends TestCase
     {
         $user = $this->createUser();
 
-        FetchFavorites::dispatch($user);
+        FetchLikes::dispatch($user);
 
         $this
             ->actingAs($user)
