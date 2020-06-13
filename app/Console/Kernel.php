@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
                 FetchUser::dispatch($user);
                 FetchFavorites::dispatch($user);
             });
-        })->everyHour();
+        })->hourly();
     }
 
     protected function commands() : void
