@@ -51,9 +51,7 @@ class FetchLikes extends BaseJob
                 break;
             }
 
-            $this->likes = ! empty($this->likes)
-                ? $this->likes->concat($response)
-                : collect($response);
+            $this->likes = $this->likes->concat($response);
         } while (true);
 
         return $this;
