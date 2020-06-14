@@ -13,6 +13,10 @@ provider:
           Action: [sqs:SendMessage, sqs:DeleteMessage]
           Resource:
               Fn::GetAtt: [ TwitterQueue, Arn ]
+        - Effect: Allow
+          Action: [dynamodb:Query, dynamodb:Scan, dynamodb:GetItem, dynamodb:PutItem, dynamodb:UpdateItem, dynamodb:DeleteItem]
+          Resource:
+              Fn::GetAtt: [ChirpCache, Arn]
 
 functions:
     website:
@@ -75,12 +79,24 @@ custom:
 
 resources:
     Resources:
+        ChirpCache:
+            Type: AWS::DynamoDB::Table
+            Properties:
+                TableName: chirp_cache
+                AttributeDefinitions:
+                    - AttributeName: key
+                      AttributeType: S
+                KeySchema:
+                    - AttributeName: key
+                      KeyType: HASH
+                ProvisionedThroughput:
+                    ReadCapacityUnits: 5
+                    WriteCapacityUnits: 5
         TwitterQueue:
             Type: AWS::SQS::Queue
             Properties:
                 RedrivePolicy:
-                    maxReceiveCount: 3 # Jobs will be retried up to 3 times.
-                    # Failed jobs (after the retries) will be moved to another queue for storage.
+                    maxReceiveCount: 3
                     deadLetterTargetArn:
                         Fn::GetAtt: [ DeadLetterQueue, Arn ]
         DeadLetterQueue:
