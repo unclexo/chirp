@@ -6,9 +6,9 @@
     <div class="bg-gray-700 mt-8 py-4 rounded">
         @if ($blockedUsers->isNotEmpty())
             <ul>
-                @foreach ($blockedUsers as $user)
+                @foreach ($blockedUsers as $blockedUser)
                     <li>
-                        <x-user :user="new App\Presenters\UserPresenter((object) $user)" />
+                        <x-user :data="new App\Presenters\UserPresenter($blockedUser)" />
                     </li>
                 @endforeach
             </ul>
