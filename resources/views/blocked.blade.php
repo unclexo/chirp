@@ -8,7 +8,7 @@
             <ul>
                 @foreach ($blockedUsers as $blockedUser)
                     <li>
-                        <x-user :data="new App\Presenters\UserPresenter($blockedUser)" />
+                        <x-user :user-object="new App\Presenters\UserPresenter($blockedUser)" />
                     </li>
                 @endforeach
             </ul>

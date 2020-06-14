@@ -8,7 +8,7 @@
             <ul>
                 @foreach ($mutedUsers as $mutedUser)
                     <li>
-                        <x-user :data="new App\Presenters\UserPresenter($mutedUser)" />
+                        <x-user :user-object="new App\Presenters\UserPresenter($mutedUser)" />
                     </li>
                 @endforeach
             </ul>
