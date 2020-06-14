@@ -15,6 +15,8 @@ class SignInWithTwitterTest extends DuskTestCase
     {
         Artisan::call('migrate:fresh');
 
+        $this->assertDatabaseMissing('users', $attributes = ['name' => 'Benjamin Crozat']);
+
         $this->browse(function (Browser $browser) {
             $browser
                 ->visitRoute('home')
@@ -23,6 +25,7 @@ class SignInWithTwitterTest extends DuskTestCase
                 ->clickLink('Sign in with Twitter')
                 // Now, we're on twitter.com.
                 ->waitForLocation('/oauth/authenticate')
+                ->assertHostIs('api.twitter.com')
                 ->type('session[username_or_email]', config('services.twitter.test_user_name'))
                 ->type('session[password]', config('services.twitter.test_user_password'))
                 ->click('#allow')

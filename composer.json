@@ -59,8 +59,8 @@
             "@php artisan key:generate --ansi"
         ],
         "test": [
-            "@php vendor/bin/phpunit",
-            "@php artisan dusk"
+            "@php artisan dusk",
+            "@php vendor/bin/phpunit"
         ]
     },
     "minimum-stability": "dev",
