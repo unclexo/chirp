@@ -19,6 +19,12 @@ trait CreatesUser
 
         FetchUser::dispatch($user);
 
-        return $user->fresh();
+        return $user->fresh([
+            'blocked',
+            'followers',
+            'followings',
+            'likes',
+            'muted',
+        ]);
     }
 }

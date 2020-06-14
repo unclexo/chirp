@@ -2,8 +2,8 @@
     <h2 class="font-semibold leading-none text-center text-xl">
         @choice(
             ':formatted like|:formatted likes',
-            $user->data->favourites_count,
-            ['formatted' => $user->presenter->favouritesCount()]
+            $likes->total(),
+            ['formatted' => number_format($likes->total())]
         )
     </h2>
 

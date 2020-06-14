@@ -22,16 +22,16 @@ class BlockedUsersTest extends TestCase
     /** @test */
     public function blocked_users_are_listed() : void
     {
-        $user = $this->createUser();
-
-        FetchBlockedUsers::dispatch($user);
+        FetchBlockedUsers::dispatch(
+            $user = $this->createUser()
+        );
 
         $this
             ->actingAs($user)
             ->getJson(route('blocked'))
             ->assertOk()
             ->assertView()
-            ->contains("{$user->blocked->count()} blocked users")
+            ->contains(number_format($user->blocked_count) . ' blocked users')
         ;
     }
 }

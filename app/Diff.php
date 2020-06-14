@@ -5,8 +5,8 @@ namespace App;
 use App\Traits\Unguarded;
 use App\Presenters\DiffPresenter;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Diff extends Model
 {
@@ -19,8 +19,7 @@ class Diff extends Model
 
     public static function diffsHistory(int $user_id, string $for) : Collection
     {
-        $diffs = DB::table('diffs')
-            ->selectRaw('
+        return self::selectRaw('
                 DATE(created_at) AS date,
                 user_id,
                 JSON_ARRAYAGG(additions) AS additions,
@@ -31,8 +30,12 @@ class Diff extends Model
             ->groupBy('date')
             ->groupBy('user_id')
             ->orderBy('date', 'DESC')
-            ->get();
+            ->get()
+            ->map(fn ($d) => new DiffPresenter($d));
+    }
 
-        return $diffs->map(fn ($d) => new DiffPresenter($d));
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

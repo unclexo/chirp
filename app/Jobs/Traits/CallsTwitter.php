@@ -4,49 +4,15 @@ namespace App\Jobs\Traits;
 
 use Exception;
 use App\Facades\Twitter;
-use Illuminate\Support\Arr;
-use Abraham\TwitterOAuth\TwitterOAuth;
+use Illuminate\Support\Collection;
 
 trait CallsTwitter
 {
-    /**
-     * Going through this method allows us to always access a fully set up TwitterOAuth object.
-     * Putting `Twitter::setOauthToken()` in the constructor isn't possible because the job
-     * is already initialized when it's being unserialized by Laravel coming from SQS.
-     */
-    protected function twitter() : TwitterOAuth
+    protected function getUsersDetailsForIds($ids) : Collection
     {
-        Twitter::setOauthToken(
-            $this->user->token,
-            $this->user->token_secret
-        );
+        $chunks = (new Collection($ids))->chunk(100);
 
-        return Twitter::getFacadeRoot();
-    }
-
-    public function getIdsFor(string $endpoint) : array
-    {
-        do {
-            $response = $this->guardAgainstTwitterErrors(
-                $this->twitter()->get("$endpoint/ids", [
-                    'cursor' => $response->next_cursor ?? -1,
-                ])
-            );
-
-            $ids = array_merge($ids ?? [], $response->ids);
-        } while ($response->next_cursor);
-
-        return $ids;
-    }
-
-    protected function getUsersDetailsForIds(array $ids) : array
-    {
-        // The code below uses vanilla PHP to work through arrays instead of Collections. More details:
-        // https://github.com/benjamincrozat/chirp/commit/6e54b53ef8cd5085756ed226f1448e9fed092df4
-
-        $chunks = array_chunk($ids, 100);
-
-        if (! count($chunks)) {
+        if ($chunks->isEmpty()) {
             return $chunks;
         }
 
@@ -54,37 +20,33 @@ trait CallsTwitter
 
         $friendships = $this->getConnectionsToUserFromIds($chunks);
 
-        return array_map(function (object $user) use ($friendships) {
-            $key = array_search($user->id, array_column((array) $friendships, 'id'));
+        return $users->map(function ($user) use ($friendships) {
+            $user->connections = $friendships->where('id', $user->id)->first()->connections;
 
-            return array_merge((array) $user, (array) $friendships[$key]);
-        }, $users);
+            return $user;
+        });
     }
 
-    public function getUsersFromIds(array $chunks) : array
+    public function getUsersFromIds(Collection $chunks) : Collection
     {
-        return Arr::collapse(array_map(function (array $ids) {
-            $users = $this->guardAgainstTwitterErrors(
-                $this->twitter()->get('users/lookup', [
-                    'user_id' => implode(',', $ids),
+        return $chunks->map(function (Collection $ids) {
+            return $this->guardAgainstTwitterErrors(
+                Twitter::get('users/lookup', [
+                    'user_id' => $ids->join(','),
                 ])
             );
-
-            return $users;
-        }, $chunks));
+        })->collapse();
     }
 
-    public function getConnectionsToUserFromIds(array $chunks) : array
+    public function getConnectionsToUserFromIds(Collection $chunks) : Collection
     {
-        return Arr::collapse(array_map(function (array $ids) {
-            $friendships = $this->guardAgainstTwitterErrors(
-                $this->twitter()->get('friendships/lookup', [
-                    'user_id' => implode(',', $ids),
+        return $chunks->map(function (Collection $ids) {
+            return $this->guardAgainstTwitterErrors(
+                Twitter::get('friendships/lookup', [
+                    'user_id' => $ids->join(','),
                 ])
             );
-
-            return $friendships;
-        }, $chunks));
+        })->collapse();
     }
 
     /**

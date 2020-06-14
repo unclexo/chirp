@@ -1,6 +1,10 @@
 <x-layouts.full>
     <h2 class="font-semibold leading-none text-center text-xl">
-        @choice(':count muted user|:count muted users', $user->muted->count())
+        @choice(
+            ':formatted muted user|:formatted muted users',
+            $user->muted_count,
+            ['formatted' => number_format($user->muted_count)]
+        )
     </h2>
 
     <div class="bg-gray-700 mt-8 py-4 rounded">
@@ -8,7 +12,7 @@
             <ul>
                 @foreach ($mutedUsers as $mutedUser)
                     <li>
-                        <x-user :user-object="new App\Presenters\UserPresenter($mutedUser)" />
+                        <x-user :user-object="new App\Presenters\UserPresenter($mutedUser->data)" />
                     </li>
                 @endforeach
             </ul>

@@ -16,7 +16,7 @@ class FollowingsController extends Controller
     public function __invoke(Request $request) : View
     {
         return view('followings')->withDiffs(
-            Diff::diffsHistory($request->user()->id, 'friends')
+            Diff::diffsHistory($request->user()->id, 'followings')
         );
     }
 }

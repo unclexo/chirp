@@ -4,7 +4,6 @@ namespace App;
 
 use App\Traits\Unguarded;
 use App\Presenters\UserPresenter;
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -13,18 +12,37 @@ class User extends Authenticatable
     use Unguarded;
 
     protected $casts = [
-        'data'      => 'object',
-        'followers' => 'collection',
-        'friends'   => 'collection',
-        'muted'     => 'collection',
-        'blocked'   => 'collection',
+        'data' => 'object',
     ];
 
     public $incrementing = false;
 
+    protected $withCount = [
+        'blocked',
+        'followers',
+        'followings',
+        'likes',
+        'muted',
+    ];
+
+    public function blocked() : HasMany
+    {
+        return $this->hasMany(Blocked::class);
+    }
+
     public function diffs() : HasMany
     {
         return $this->hasMany(Diff::class);
+    }
+
+    public function followers() : HasMany
+    {
+        return $this->hasMany(Follower::class);
+    }
+
+    public function followings() : HasMany
+    {
+        return $this->hasMany(Follower::class);
     }
 
     public function likes() : HasMany
@@ -32,24 +50,9 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
-    public function getFollowersAttribute() : Collection
+    public function muted() : HasMany
     {
-        return new Collection(json_decode($this->attributes['followers']) ?? []);
-    }
-
-    public function getFriendsAttribute() : Collection
-    {
-        return new Collection(json_decode($this->attributes['friends']) ?? []);
-    }
-
-    public function getMutedAttribute() : Collection
-    {
-        return new Collection(json_decode($this->attributes['muted']) ?? []);
-    }
-
-    public function getBlockedAttribute() : Collection
-    {
-        return new Collection(json_decode($this->attributes['blocked']) ?? []);
+        return $this->hasMany(Muted::class);
     }
 
     public function getPresenterAttribute() : UserPresenter

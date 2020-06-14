@@ -22,16 +22,16 @@ class ListLikesTest extends TestCase
     /** @test */
     public function likes_are_listed() : void
     {
-        $user = $this->createUser();
-
-        FetchLikes::dispatch($user);
+        FetchLikes::dispatch(
+            $user = $this->createUser()
+        );
 
         $this
             ->actingAs($user)
             ->getJson(route('likes.index'))
             ->assertOk()
             ->assertView()
-            ->contains("{$user->presenter->favouritesCount()} likes")
+            ->contains(number_format($user->likes_count) . ' likes')
         ;
     }
 }

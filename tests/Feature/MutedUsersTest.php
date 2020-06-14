@@ -22,16 +22,16 @@ class MutedUsersTest extends TestCase
     /** @test */
     public function muted_users_are_listed() : void
     {
-        $user = $this->createUser();
-
-        FetchMutedUsers::dispatch($user);
+        FetchMutedUsers::dispatch(
+            $user = $this->createUser()
+        );
 
         $this
             ->actingAs($user)
             ->getJson(route('muted'))
             ->assertOk()
             ->assertView()
-            ->contains("{$user->muted->count()} muted users")
+            ->contains(number_format($user->muted_count) . ' muted users')
         ;
     }
 }

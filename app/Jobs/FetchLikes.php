@@ -28,7 +28,8 @@ class FetchLikes extends BaseJob
         $this
             ->fetchLikes()
             ->deleteUnecessaryLikes()
-            ->insertNewLikes();
+            ->insertNewLikes()
+        ;
     }
 
     protected function fetchLikes() : self
