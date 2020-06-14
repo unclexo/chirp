@@ -10,13 +10,13 @@ provider:
     stage: prod
     iamRoleStatements:
         - Effect: Allow
-          Action: [sqs:SendMessage, sqs:DeleteMessage]
-          Resource:
-              Fn::GetAtt: [ TwitterQueue, Arn ]
-        - Effect: Allow
           Action: [dynamodb:Query, dynamodb:Scan, dynamodb:GetItem, dynamodb:PutItem, dynamodb:UpdateItem, dynamodb:DeleteItem]
           Resource:
               Fn::GetAtt: [ChirpCache, Arn]
+        - Effect: Allow
+          Action: [sqs:SendMessage, sqs:DeleteMessage]
+          Resource:
+              Fn::GetAtt: [ TwitterQueue, Arn ]
 
 functions:
     website:
