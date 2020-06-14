@@ -34,7 +34,10 @@ class FetchLikes extends BaseJob
     protected function fetchLikes() : self
     {
         do {
-            $parameters = ['count' => 200, 'tweet_mode' => 'extended'];
+            $parameters = [
+                'count'      => app()->runningUnitTests() ? 10 : 200,
+                'tweet_mode' => 'extended',
+            ];
 
             if (! empty($response)) {
                 $parameters['max_id'] = Arr::last($response)->id;
@@ -44,7 +47,7 @@ class FetchLikes extends BaseJob
                 Twitter::get('favorites/list', $parameters)
             );
 
-            if (($parameters['max_id'] ?? 0) === Arr::last($response)->id) {
+            if (app()->runningUnitTests() || ($parameters['max_id'] ?? 0) === Arr::last($response)->id) {
                 break;
             }
 

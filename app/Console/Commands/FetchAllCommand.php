@@ -5,8 +5,8 @@ namespace App\Console\Commands;
 use App\User;
 use App\Jobs\FetchUser;
 use App\Jobs\FetchLikes;
-use App\Jobs\FetchFriends;
 use App\Jobs\FetchFollowers;
+use App\Jobs\FetchFollowings;
 use App\Jobs\FetchMutedUsers;
 use App\Jobs\FetchBlockedUsers;
 use Illuminate\Console\Command;
@@ -25,7 +25,7 @@ class FetchAllCommand extends Command
         User::cursor()->each(function (User $user) {
             FetchBlockedUsers::dispatch($user);
             FetchFollowers::dispatch($user);
-            FetchFriends::dispatch($user);
+            FetchFollowings::dispatch($user);
             FetchLikes::dispatch($user);
             FetchMutedUsers::dispatch($user);
             FetchUser::dispatch($user);

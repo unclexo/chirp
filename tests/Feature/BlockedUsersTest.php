@@ -6,12 +6,21 @@ use Tests\TestCase;
 use App\Jobs\FetchBlockedUsers;
 use Tests\Concerns\CreatesUser;
 
-class BlockedControllerTest extends TestCase
+class BlockedUsersTest extends TestCase
 {
     use CreatesUser;
 
     /** @test */
-    public function it_works() : void
+    public function guests_cannot_access_blocked_users_page()
+    {
+        $this
+            ->getJson(route('blocked'))
+            ->assertStatus(401)
+        ;
+    }
+
+    /** @test */
+    public function blocked_users_are_listed() : void
     {
         $user = $this->createUser();
 

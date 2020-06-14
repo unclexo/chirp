@@ -1,5 +1,7 @@
 <x-layouts.full>
-    <h2 class="font-semibold leading-none text-center text-xl">Muted accounts</h2>
+    <h2 class="font-semibold leading-none text-center text-xl">
+        @choice(':count muted user|:count muted users', $user->muted->count())
+    </h2>
 
     <div class="bg-gray-700 mt-8 py-4 rounded">
         @if ($mutedUsers->isNotEmpty())

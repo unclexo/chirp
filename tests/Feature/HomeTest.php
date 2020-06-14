@@ -1,0 +1,30 @@
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use Tests\Concerns\CreatesUser;
+
+class HomeTest extends TestCase
+{
+    use CreatesUser;
+
+    /** @test */
+    public function guests_can_access_the_home_page() : void
+    {
+        $this
+            ->getJson(route('home'))
+            ->assertOk()
+        ;
+    }
+
+    /** @test */
+    public function users_cannot_access_the_home_page() : void
+    {
+        $this
+            ->actingAs($this->createUser())
+            ->getJson(route('home'))
+            ->assertRedirect(route('overview'))
+        ;
+    }
+}

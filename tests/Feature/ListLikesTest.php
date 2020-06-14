@@ -6,12 +6,21 @@ use Tests\TestCase;
 use App\Jobs\FetchLikes;
 use Tests\Concerns\CreatesUser;
 
-class ListLikesControllerTest extends TestCase
+class ListLikesTest extends TestCase
 {
     use CreatesUser;
 
     /** @test */
-    public function it_works() : void
+    public function guests_cannot_access_likes_page()
+    {
+        $this
+            ->getJson(route('likes.index'))
+            ->assertStatus(401)
+        ;
+    }
+
+    /** @test */
+    public function likes_are_listed() : void
     {
         $user = $this->createUser();
 

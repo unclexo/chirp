@@ -5,12 +5,21 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Tests\Concerns\CreatesUser;
 
-class OverviewControllerTest extends TestCase
+class OverviewTest extends TestCase
 {
     use CreatesUser;
 
     /** @test */
-    public function it_works() : void
+    public function guests_cannot_access_overview_page()
+    {
+        $this
+            ->getJson(route('overview'))
+            ->assertStatus(401)
+        ;
+    }
+
+    /** @test */
+    public function overview_page_displays_relevant_informations() : void
     {
         $this
             ->actingAs($user = $this->createUser())

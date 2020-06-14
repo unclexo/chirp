@@ -1,6 +1,6 @@
 <x-layouts.full>
     <h2 class="font-semibold leading-none text-center text-xl">
-        @choice(':count blocked user|:count blocked users', $count)
+        @choice(':count blocked user|:count blocked users', $user->blocked->count())
     </h2>
 
     <div class="bg-gray-700 mt-8 py-4 rounded">

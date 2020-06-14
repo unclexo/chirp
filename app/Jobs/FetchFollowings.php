@@ -4,7 +4,7 @@ namespace App\Jobs;
 
 use App\Jobs\Traits\MakesDiffs;
 
-class FetchFriends extends BaseJob
+class FetchFollowings extends BaseJob
 {
     use MakesDiffs;
 
