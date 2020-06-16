@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Abraham\TwitterOAuth\TwitterOAuth;
 use App\Twitter\TwitterOAuthWithCache;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
@@ -16,7 +17,9 @@ class AppServiceProvider extends ServiceProvider
                 $app['config']->get('services.twitter.client_secret'),
             ];
 
-            return new TwitterOAuthWithCache(...$arguments);
+            return $app->environment('testing')
+                ? new TwitterOAuthWithCache(...$arguments)
+                : new TwitterOAuth(...$arguments);
         });
     }
 }
