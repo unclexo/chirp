@@ -1,10 +1,14 @@
+![Meet Chirp, a free Twitter activity tracker](https://d1srrlgsf6kxjv.cloudfront.net/img/banner.jpg)
+
 # Chirp
+
+[Chirp](https://chirp.benjamincrozat.com) is a Laravel app running on AWS Lambda. It also uses RDS, SQS and DynamoDB. Hope you'll be able to learn something from it. Also, I'm always thrilled to receive good critisism and PRs.
+
+## Table of contents
 
 - [Development](#development)
 - [Testing](#testing)
 - [Deployment](#deployment)
-
-[Chirp](https://chirp.benjamincrozat.com) is a Laravel app running on AWS Lambda. It also uses RDS, SQS and DynamoDB. Hope you'll be able to learn something from it. Also, I'm always thrilled to receive good critisism and PRs.
 
 ## Development
 
