@@ -35,3 +35,5 @@ make
 ```
 
 ## License
+
+MIT
