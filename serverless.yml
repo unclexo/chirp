@@ -57,11 +57,11 @@ package:
     exclude:
         - '**/.DS_Store'
         - .github/**
-        - app/Jobs/**/*.json
         - node_modules/**
         - public/css/**
         - public/img/**
         - public/js/**
+        - resources/js/**
         - resources/sass/**
         - storage/**
         - stubs/**
