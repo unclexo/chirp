@@ -1,15 +1,14 @@
 # Chirp
 
-- [Welcome](#welcome)
 - [Development](#development)
 - [Testing](#testing)
 - [Deployment](#deployment)
 
-## Welcome
-
-Hello! Welcome to Chirp's repository! You're there because you sponsor me on GitHub. Thank you!
+Chirp is a Laravel app running on AWS Lambda. It also uses RDS, SQS and DynamoDB. Hope you'll be able to learn something from it. Also, I'm always thrilled to receive good critisism and PRs.
 
 ## Development
+
+Run the project locally on whatever environment you prefer.
 
 ```bash
 composer install
@@ -26,12 +25,13 @@ yarn && yarn dev
 ## Testing
 
 ```bash
-php vendor/bin/phpunit
+composer test
 ```
 
 ## Deployment
 
 ```bash
-make deploy
+make
 ```
+
 ## License
