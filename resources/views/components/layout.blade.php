@@ -40,8 +40,8 @@
     </head>
     <body class="bg-gray-900 text-gray-400">
         <p class="container">
-            <a href="https://github.com/sponsors/benjamincrozat" class="block py-4 text-center">
-                <span class="block container">Sponsor @config('app.name')'s developer on GitHub and <strong>get access to the source code</strong> to see how this serverless app works! →</span>
+            <a href="https://github.com/benjamincrozat/chirp" class="block py-4 text-center">
+                <span class="block container">@config('app.name')'s is open source. Check it out on GitHub! →</span>
             </a>
         </p>
 
