@@ -2,7 +2,7 @@
 
 # Chirp
 
-[Chirp](https://chirp.benjamincrozat.com) is a Laravel app running on AWS Lambda. It also uses RDS, SQS and DynamoDB. Hope you'll be able to learn something from it. Also, I'm always thrilled to receive good critisism and PRs.
+[Chirp](https://chirp.benjamincrozat.com) is a Laravel based app running on AWS Lambda. It also uses RDS, SQS and DynamoDB. Hope you'll be able to learn something from it. Also, I'm always thrilled to receive good critisism and PRs.
 
 ## Table of contents
 
@@ -16,14 +16,14 @@ Run the project locally on whatever environment you prefer. This shouldn't be en
 
 ```bash
 composer install
-```
 
-```bash
+cp .env.example .env
+
+php artisan key:generate
 php artisan migrate
-```
 
-```bash
-yarn && yarn dev
+yarn
+yarn dev
 ```
 
 ## Testing

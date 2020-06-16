@@ -1,6 +1,7 @@
 *.log
 /.env*
 !/.env.example
+!/.env.production.example
 /.idea
 /.php_cs.cache
 /.phpstorm.meta.php
