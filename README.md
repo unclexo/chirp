@@ -30,7 +30,7 @@ yarn dev
 
 Few notes about my testing strategy:
 - The "sign in with Twitter" button on the home page is tested with Dusk;
-- Twitter's API isn't mocked. I can't be confident about Chirp's stability if I can't hit the real API. To avoid rate limit errors, I just cache the API's responses.
+- Twitter's API isn't mocked. I can't be confident about Chirp's stability if I can't hit the real stuff. To avoid rate limit errors, I just cache the responses.
 
 ```bash
 composer test
@@ -39,6 +39,8 @@ composer test
 ## Deployment
 
 ```bash
+cp .env.production.example .env.production
+
 make
 ```
 
