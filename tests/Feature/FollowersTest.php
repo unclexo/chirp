@@ -22,9 +22,7 @@ class FollowersTest extends TestCase
     /** @test */
     public function followers_diffs_are_listed() : void
     {
-        $user = $this->createUser();
-
-        FetchFollowers::dispatch($user);
+        FetchFollowers::dispatch($user = $this->createUser());
 
         $this
             ->actingAs($user)

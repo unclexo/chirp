@@ -25,6 +25,8 @@ class SettingsTest extends TestCase
             ->actingAs($this->createUser())
             ->getJson(route('settings'))
             ->assertOk()
+            ->assertView()
+            ->contains('Delete')
         ;
     }
 }

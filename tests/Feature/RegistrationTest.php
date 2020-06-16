@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Jobs\FetchUser;
 use App\Jobs\FetchLikes;
 use App\Jobs\FetchFollowers;
 use App\Jobs\FetchFollowings;
@@ -22,13 +21,26 @@ class RegistrationTest extends TestCase
     {
         Bus::fake();
 
-        event(new Registered($this->createUser()));
+        event(new Registered($user = $this->createUser()));
 
-        Bus::assertDispatched(FetchBlockedUsers::class);
-        Bus::assertDispatched(FetchFollowers::class);
-        Bus::assertDispatched(FetchFollowings::class);
-        Bus::assertDispatched(FetchLikes::class);
-        Bus::assertDispatched(FetchMutedUsers::class);
-        Bus::assertDispatched(FetchUser::class);
+        Bus::assertDispatched(
+            fn (FetchBlockedUsers $j) => $j->user->id === $user->id
+        );
+
+        Bus::assertDispatched(
+            fn (FetchFollowers $j) => $j->user->id === $user->id
+        );
+
+        Bus::assertDispatched(
+            fn (FetchFollowings $j) => $j->user->id === $user->id
+        );
+
+        Bus::assertDispatched(
+            fn (FetchLikes $j) => $j->user->id === $user->id
+        );
+
+        Bus::assertDispatched(
+            fn (FetchMutedUsers $j) => $j->user->id === $user->id
+        );
     }
 }

@@ -22,9 +22,7 @@ class ListLikesTest extends TestCase
     /** @test */
     public function likes_are_listed() : void
     {
-        FetchLikes::dispatch(
-            $user = $this->createUser()
-        );
+        FetchLikes::dispatch($user = $this->createUser());
 
         $this
             ->actingAs($user)

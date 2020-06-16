@@ -15,6 +15,9 @@ class HomeTest extends TestCase
         $this
             ->getJson(route('home'))
             ->assertOk()
+            ->assertView()
+            ->contains('Sign in with Twitter')
+            ->hasLink(route('login'))
         ;
     }
 

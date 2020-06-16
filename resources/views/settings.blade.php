@@ -13,7 +13,7 @@
             </p>
 
             <p class="mt-4 text-center">
-                <button type="submit" class="bg-red-500 hover:bg-red-400 font-semibold px-4 py-2 rounded text-red-100 hover:text-yellow-500">Supprimer</button>
+                <button type="submit" class="bg-red-500 hover:bg-red-400 font-semibold px-4 py-2 rounded text-red-100 hover:text-yellow-500">Delete</button>
             </p>
         </div>
     </form>

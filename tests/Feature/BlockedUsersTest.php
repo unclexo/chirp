@@ -20,18 +20,23 @@ class BlockedUsersTest extends TestCase
     }
 
     /** @test */
-    public function blocked_users_are_listed() : void
+    public function blocked_users_are_listed_and_paginated() : void
     {
         FetchBlockedUsers::dispatch(
             $user = $this->createUser()
         );
 
-        $this
+        $response = $this
             ->actingAs($user)
             ->getJson(route('blocked'))
-            ->assertOk()
+            ->assertOk();
+
+        $response
             ->assertView()
             ->contains(number_format($user->blocked_count) . ' blocked users')
         ;
+
+        $this->assertGreaterThan($perPage = 30, $response->original->blockedUsers->total());
+        $this->assertCount($perPage, $response->original->blockedUsers);
     }
 }

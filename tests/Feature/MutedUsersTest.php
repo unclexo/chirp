@@ -22,16 +22,20 @@ class MutedUsersTest extends TestCase
     /** @test */
     public function muted_users_are_listed() : void
     {
-        FetchMutedUsers::dispatch(
-            $user = $this->createUser()
-        );
+        FetchMutedUsers::dispatch($user = $this->createUser());
 
-        $this
+        $response = $this
             ->actingAs($user)
             ->getJson(route('muted'))
             ->assertOk()
+        ;
+
+        $response
             ->assertView()
             ->contains(number_format($user->muted_count) . ' muted users')
         ;
+
+        $this->assertGreaterThan($perPage = 30, $response->original->blockedUsers->total());
+        $this->assertCount($perPage, $response->original->blockedUsers);
     }
 }
